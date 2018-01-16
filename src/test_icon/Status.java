@@ -13,5 +13,9 @@ public enum Status {
     Drawing,Selection,
     CreatingOBJ, EllipseOBJ,
     Activated, Inactivated, MovingOBJ, Moving,
-    Ready2Resize, Resizing 
+    Ready2Resize, Resizing ,
+    
+    //為了讓 ToolBar 有相對應的 ParametersBar
+    ToolBarPan, ToolBarNewPage, ToolBarRect, ToolBarImg
+    
 }

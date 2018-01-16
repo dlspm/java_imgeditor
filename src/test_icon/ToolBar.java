@@ -45,6 +45,9 @@ import javax.swing.*;
             public void mouseClicked(MouseEvent e){
                 
                 
+                ep.parametersBar.status = Status.ToolBarPan;
+                ep.parametersBar.setToolBarPan();
+                System.out.println("success Pan");
             }
         });
         
@@ -68,6 +71,9 @@ import javax.swing.*;
                     ep.megBar.updateInfo(ep.curPages, ep.numPages);
                     ep.mainWin.cpanel.revalidate();
                     
+                    
+                    ep.parametersBar.status = Status.ToolBarNewPage;
+                    ep.parametersBar.setToolBarNewPage();
                     System.out.println("success newPage");
                     
                 } catch (MalformedURLException ex) {
@@ -82,7 +88,11 @@ import javax.swing.*;
         
         Btnnewrect.addMouseListener(new MouseAdapter() {
             public void mouseClicked(MouseEvent e) {
-
+                
+                
+                ep.parametersBar.status = Status.ToolBarRect;
+                ep.parametersBar.setToolBarRect();
+                System.out.println("success Rect");
             }
         });
         this.add(Btnnewrect);
@@ -96,6 +106,10 @@ import javax.swing.*;
                     ep.activePage.addOBJ(no);
 //                    ep.activePage.add(no);
                     ep.activePage.revalidate();
+                    
+                    ep.parametersBar.status = Status.ToolBarImg;
+                    ep.parametersBar.setToolBarImg();
+                    System.out.println("success Btnimg");
                     
                 } catch (MalformedURLException ex) {
                     Logger.getLogger(ToolBar.class.getName()).log(Level.SEVERE, null, ex);

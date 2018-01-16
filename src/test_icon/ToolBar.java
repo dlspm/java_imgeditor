@@ -20,8 +20,8 @@ import javax.swing.*;
  *
  * @author angus
  */
-public class ToolBar extends JPanel implements ActionListener {
-    
+//public class ToolBar extends JPanel implements ActionListener {
+  public class ToolBar extends JPanel{  
     JButton Btnpen, Btnnewpage, Btnnewrect, Btnimg;
     
     
@@ -35,10 +35,10 @@ public class ToolBar extends JPanel implements ActionListener {
         Btnnewrect = new JButton("Rect");
         Btnimg = new JButton("Img");
         
-        Btnpen.addActionListener(this);
-        Btnnewpage.addActionListener(this);
-        Btnnewrect.addActionListener(this);
-        Btnimg.addActionListener(this);
+//        Btnpen.addActionListener(this);
+//        Btnnewpage.addActionListener(this);
+//        Btnnewrect.addActionListener(this);
+//        Btnimg.addActionListener(this);
         
         Btnpen.addMouseListener(new MouseAdapter()
         {
@@ -53,18 +53,27 @@ public class ToolBar extends JPanel implements ActionListener {
         
         Btnnewpage.addMouseListener(new MouseAdapter() {
             public void mouseClicked(MouseEvent e) {
-                if (ep.imgPage != null) {
-                    ep.mainWin.remove(ep.imgPage);
+                try {
+                    System.out.println("mouseClicked newPage");
+                    if (ep.activePage != null) {
+                        ep.mainWin.remove(ep.activePage);
+                    }
+                    
+                    ep.activePage = new ImgPage();
+                    ep.pages.add(ep.activePage);
+                    
+                    ep.mainWin.setImgPage(ep.activePage);
+                    
+                    ep.curPages = ++ep.numPages;
+                    ep.megBar.updateInfo(ep.curPages, ep.numPages);
+                    ep.mainWin.cpanel.revalidate();
+                    
+                    System.out.println("success newPage");
+                    
+                } catch (MalformedURLException ex) {
+                    Logger.getLogger(ToolBar.class.getName()).log(Level.SEVERE, null, ex);
                 }
                 
-//                try {
-//                    ep.imgPage = new ImgPage();
-////                    ep.pages.add(ep.imgPage);
-//                    
-//                    
-//                } catch (MalformedURLException ex) {
-//                    Logger.getLogger(ToolBar.class.getName()).log(Level.SEVERE, null, ex);
-//                }
                 
             }
         });
@@ -82,13 +91,15 @@ public class ToolBar extends JPanel implements ActionListener {
         Btnimg.addMouseListener(new MouseAdapter() {
             public void mouseClicked(MouseEvent e) {
                 
-                
                 try {
-                    Img newOBJ = new Img("https://d2hsbzg80yxel6.cloudfront.net/images/69511/medium/16639037694fbdf3c729b5b.jpg");
+                    Img no = new Img("https://d2hsbzg80yxel6.cloudfront.net/images/69511/medium/16639037694fbdf3c729b5b.jpg");
+                    ep.activePage.addOBJ(no);
+//                    ep.activePage.add(no);
+                    ep.activePage.revalidate();
+                    
                 } catch (MalformedURLException ex) {
                     Logger.getLogger(ToolBar.class.getName()).log(Level.SEVERE, null, ex);
                 }
-                
             }
         });
         this.add(Btnimg);
@@ -96,11 +107,12 @@ public class ToolBar extends JPanel implements ActionListener {
         this.setSize(100,600);
         
     }
-
-    @Override
-    public void actionPerformed(ActionEvent e) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
     
-    
+//
+//    @Override
+//    public void actionPerformed(ActionEvent e) {
+//        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+//    }
+//    
+//    
 }

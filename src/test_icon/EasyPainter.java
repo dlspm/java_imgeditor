@@ -26,14 +26,14 @@ class EasyPainter {
     public String version = "4.0";
     public MessageBar megBar;
     public ToolBar toolBar;
-    public ImgPage imgPage = null;
+//    public ImgPage imgPage = null;
     public ParametersBar parametersBar;
     
     public MainWindow mainWin;
     public int curPages = 0;
     public int numPages = 0;
     
-//    public ImgPage activePage = null;
+    public ImgPage activePage = null;
 
     public Vector<ImgPage> pages = null;
     String Title;
@@ -49,7 +49,7 @@ class EasyPainter {
         pages = new Vector<ImgPage>();
         mainWin.setMessageBar(megBar);
         mainWin.setToolBar(toolBar);
-        mainWin.setImgPage(imgPage);
+//        mainWin.setImgPage(ImgPage);
         mainWin.setParametersBar(parametersBar);
         
         mainWin.setVisible(true);

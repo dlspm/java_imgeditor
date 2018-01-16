@@ -88,6 +88,7 @@ public class ToolBar extends JPanel implements ActionListener {
                 } catch (MalformedURLException ex) {
                     Logger.getLogger(ToolBar.class.getName()).log(Level.SEVERE, null, ex);
                 }
+                
             }
         });
         this.add(Btnimg);

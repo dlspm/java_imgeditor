@@ -10,7 +10,7 @@ import java.util.Vector;
 
 import test_icon.MainWindow;
 import test_icon.MessageBar;
-import test_icon.Page;
+import test_icon.ImgPage;
 
 import java.awt.*;
 import java.awt.event.*;
@@ -33,9 +33,9 @@ class EasyPainter {
     public int curPages = 0;
     public int numPages = 0;
     
-    public Page activePage = null;
+//    public ImgPage activePage = null;
 
-    public Vector<Page> pages = null;
+    public Vector<ImgPage> pages = null;
     String Title;
 
     EasyPainter() throws MalformedURLException {
@@ -43,10 +43,10 @@ class EasyPainter {
         mainWin = new MainWindow(this);
         megBar = new MessageBar(this);
         toolBar = new ToolBar(this);
-        imgPage = new ImgPage(this);
+//        imgPage = new ImgPage(this);
         parametersBar = new ParametersBar(this);
         
-        pages = new Vector<Page>();
+        pages = new Vector<ImgPage>();
         mainWin.setMessageBar(megBar);
         mainWin.setToolBar(toolBar);
         mainWin.setImgPage(imgPage);

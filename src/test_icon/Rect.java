@@ -5,10 +5,17 @@
  */
 package test_icon;
 
+import java.awt.*;
 /**
  *
  * @author angus
  */
-public class Page {
+public class Rect {
     
+    Point begin, end;
+    Rect(Point p1, Point p2)
+    {
+        begin = p1;
+        end = p2;
+    }
 }

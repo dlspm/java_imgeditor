@@ -20,8 +20,7 @@ public class MainWindow extends JFrame{  //用extends 去繼承 Frame
 //    JPanel thePanel;
 //    Container thePanel;
     Container cpanel = this.getContentPane();
-    MainWindow(EasyPainter ep)
-    {
+    MainWindow(EasyPainter ep){
         
         
         this.pack(); // 用來將視窗中的各個元件，自動依版面配置作適當的排列。

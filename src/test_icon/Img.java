@@ -17,7 +17,7 @@ import javax.swing.*;
  *
  * @author angus
  */
-public class Img extends JPanel{
+public class Img extends easyOBJ {
     
     JLabel Jlaimg;
     Point op,lp=null,cp=null;

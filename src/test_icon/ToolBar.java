@@ -22,19 +22,22 @@ import javax.swing.*;
  */
 //public class ToolBar extends JPanel implements ActionListener {
   public class ToolBar extends JPanel{  
-    JButton Btnpen, Btnnewpage, Btnnewrect, Btnimg, Btntext;
+    JButton Btnpen, Btnnewpage, Btnnewrect, Btnimg, Btntext, Btndow, Btnicon, Btnsele;
     
     
     
     ToolBar(EasyPainter ep) throws MalformedURLException{
  
-        this.setLayout(new GridLayout(5, 1));
+        this.setLayout(new GridLayout(9, 1));
         
         Btnpen = new JButton("Pen");
         Btnnewpage = new JButton("NewPage");
         Btnnewrect = new JButton("Rect");
         Btnimg = new JButton("Img");
         Btntext = new JButton("Text");
+        Btndow = new JButton("Dow");
+        Btnicon = new JButton("Icon");
+        Btnsele = new JButton("Select");
         
 //        Btnpen.addActionListener(this);
 //        Btnnewpage.addActionListener(this);
@@ -110,7 +113,7 @@ import javax.swing.*;
                     
                     ep.parametersBar.status = Status.ToolBarImg;
                     ep.parametersBar.setToolBarImg();
-                    System.out.println("success Btnimg");
+                    System.out.println("success Img");
                     
                 } catch (MalformedURLException ex) {
                     Logger.getLogger(ToolBar.class.getName()).log(Level.SEVERE, null, ex);
@@ -128,11 +131,57 @@ import javax.swing.*;
                 
                 ep.parametersBar.status = Status.ToolBarText;
                 ep.parametersBar.setToolBarText();
-                System.out.println("success Btnimg");
+                System.out.println("success Text");
                 
             }
         });
         this.add(Btntext);
+        
+        Btndow.addMouseListener(new MouseAdapter() {
+            public void mouseClicked(MouseEvent e) {
+                
+//                Text t = new Text();
+//                ep.activePage.add(t);
+//                ep.activePage.revalidate();
+                
+                ep.parametersBar.status = Status.ToolBarDow;
+                ep.parametersBar.setToolBarDow();
+                System.out.println("success Dow");
+                
+            }
+        });
+        this.add(Btndow);
+        
+        Btnicon.addMouseListener(new MouseAdapter() {
+            public void mouseClicked(MouseEvent e) {
+                
+//                Text t = new Text();
+//                ep.activePage.add(t);
+//                ep.activePage.revalidate();
+                
+                ep.parametersBar.status = Status.ToolBarIcon;
+                ep.parametersBar.setToolBarIcon();
+                System.out.println("success Icon");
+                
+            }
+        });
+        this.add(Btnicon);
+        
+        
+        Btnsele.addMouseListener(new MouseAdapter() {
+            public void mouseClicked(MouseEvent e) {
+
+//                Text t = new Text();
+//                ep.activePage.add(t);
+//                ep.activePage.revalidate();
+                ep.parametersBar.status = Status.ToolBarSele;
+                ep.parametersBar.setToolBarSele();
+                System.out.println("success Selected");
+
+            }
+        });
+        this.add(Btnsele);
+         
         
         
         this.setSize(100,600);

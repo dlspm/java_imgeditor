@@ -19,11 +19,11 @@ import javax.swing.*;
 //public class ParametersBar extends JPanel implements FocusListener{
   public class ParametersBar extends JPanel{  
     JTextField Jtfsize, Jtfcolor, Jtfline;
-    JButton Btnsele;
+    JButton Btnbig, Btnsmall, Btnall, Btnchoose;
     public Status status;
     
     ParametersBar(EasyPainter ep){
-        this.setLayout(new GridLayout(4, 1));
+        this.setLayout(new GridLayout(7, 1));
 
         status = Status.ToolBarNewPage; //因為一定是從 NewPage 開始
         
@@ -42,29 +42,72 @@ import javax.swing.*;
 //        Jtfcolor.addFocusListener(this);
 //        Jtfline.addFocusListener(this);
         
-        Btnsele = new JButton("選取物件");
-        Btnsele.setVisible(false);
+        Btnbig = new JButton("變大");
+        Btnbig.setVisible(false);
+        Btnsmall = new JButton("變小");
+        Btnsmall.setVisible(false);
+        Btnall = new JButton("全部");
+        Btnall.setVisible(false);
+        Btnchoose = new JButton("選取");
+        Btnchoose.setVisible(false);
+        
+        
 
         this.add(Jtfsize);
         this.add(Jtfcolor);
         this.add(Jtfline);
-        this.add(Btnsele);
-        Btnsele.addMouseListener(new MouseAdapter()
+        this.add(Btnbig);
+        Btnbig.addMouseListener(new MouseAdapter()
         {
             public void mouseClicked(MouseEvent e)
             {
-                System.out.println("選取物件");
+                System.out.println("變大");
             }
         
         });
         
+        this.add(Btnbig);
+        Btnsmall.addMouseListener(new MouseAdapter()
+        {
+            public void mouseClicked(MouseEvent e)
+            {
+                System.out.println("變小");
+            }
+        
+        });
+        
+        this.add(Btnsmall);
+        
+        
+        Btnall.addMouseListener(new MouseAdapter()
+        {
+            public void mouseClicked(MouseEvent e)
+            {
+                System.out.println("全部");
+            }
+        
+        });
+        
+        this.add(Btnall);
+        Btnchoose.addMouseListener(new MouseAdapter()
+        {
+            public void mouseClicked(MouseEvent e)
+            {
+                System.out.println("選取");
+            }
+        
+        });
+        this.add(Btnchoose);
 
         this.setSize(100, 600);
     
     }
     //ToolBarPan, ToolBarNewPage, ToolBarRect, ToolBarImg
-    public void setToolBarPan(){
-        Btnsele.setVisible(true);
+    public void setToolBarPan(){//Btnbig, Btnsmall, Btnall, Btnchoose;
+        Btnbig.setVisible(false);
+        Btnsmall.setVisible(false);
+        Btnall.setVisible(false);
+        Btnchoose.setVisible(false);
         Jtfline.setVisible(true);
         Jtfcolor.setVisible(true);
         Jtfsize.setVisible(true);
@@ -73,7 +116,10 @@ import javax.swing.*;
     }
     
     public void setToolBarNewPage(){
-        Btnsele.setVisible(true);
+        Btnbig.setVisible(false);
+        Btnsmall.setVisible(false);
+        Btnall.setVisible(false);
+        Btnchoose.setVisible(false);
         Jtfline.setVisible(false);
         Jtfcolor.setVisible(false);
         Jtfsize.setVisible(false);
@@ -82,7 +128,10 @@ import javax.swing.*;
     }
     
     public void setToolBarRect(){
-        Btnsele.setVisible(true);
+        Btnbig.setVisible(false);
+        Btnsmall.setVisible(false);
+        Btnall.setVisible(false);
+        Btnchoose.setVisible(false);
         Jtfline.setVisible(true);
         Jtfcolor.setVisible(true);
         Jtfsize.setVisible(true);
@@ -91,7 +140,46 @@ import javax.swing.*;
     }
     
     public void setToolBarImg(){
-        Btnsele.setVisible(true);
+        Btnbig.setVisible(true);
+        Btnsmall.setVisible(true);
+        Btnall.setVisible(false);
+        Btnchoose.setVisible(false);
+        Jtfline.setVisible(false);
+        Jtfcolor.setVisible(false);
+        Jtfsize.setVisible(false);
+        
+        this.revalidate();
+    }
+    
+    public void setToolBarText(){
+        Btnbig.setVisible(false);
+        Btnsmall.setVisible(false);
+        Btnall.setVisible(false);
+        Btnchoose.setVisible(false);
+        Jtfline.setVisible(false);
+        Jtfcolor.setVisible(true);
+        Jtfsize.setVisible(true);
+        
+        this.revalidate();
+    }
+    
+    public void setToolBarDow(){
+        Btnbig.setVisible(false);
+        Btnsmall.setVisible(false);
+        Btnall.setVisible(true);
+        Btnchoose.setVisible(true);
+        Jtfline.setVisible(false);
+        Jtfcolor.setVisible(false);
+        Jtfsize.setVisible(false);
+        
+        this.revalidate();
+    }
+    
+    public void setToolBarIcon(){
+        Btnbig.setVisible(false);
+        Btnsmall.setVisible(false);
+        Btnall.setVisible(false);
+        Btnchoose.setVisible(false);
         Jtfline.setVisible(false);
         Jtfcolor.setVisible(false);
         Jtfsize.setVisible(true);
@@ -99,11 +187,14 @@ import javax.swing.*;
         this.revalidate();
     }
     
-    public void setToolBarText(){
-        Btnsele.setVisible(true);
+    public void setToolBarSele(){
+        Btnbig.setVisible(false);
+        Btnsmall.setVisible(false);
+        Btnall.setVisible(false);
+        Btnchoose.setVisible(false);
         Jtfline.setVisible(false);
-        Jtfcolor.setVisible(true);
-        Jtfsize.setVisible(true);
+        Jtfcolor.setVisible(false);
+        Jtfsize.setVisible(false);
         
         this.revalidate();
     }

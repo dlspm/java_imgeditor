@@ -23,24 +23,14 @@ public class ImgPage extends JPanel{
 //    Img newOBJ = null;
     public Status status;
     
+    public easyOBJ activeOBJ  = null;
+    
     ImgPage() throws MalformedURLException{
         status = Status.Selection;
         this.setLayout(new FlowLayout());
         
         
-        
-//        URL url = new URL("https://d2hsbzg80yxel6.cloudfront.net/images/69511/medium/16639037694fbdf3c729b5b.jpg");
-//        ImageIcon imc = new ImageIcon(url);
-////        Image smallImg = (Image)imc;
-////        ImageIcon smallIcon = new ImageIcon(imc);
-//        tt = new JLabel(imc);
-//        tt.setIcon(imc);
-//        tt.setBounds(0, 0, imc.getIconWidth(), imc.getIconHeight());
-        
-        
-//        newOBJ = new Img("https://d2hsbzg80yxel6.cloudfront.net/images/69511/medium/16639037694fbdf3c729b5b.jpg");
-//        this.add(newOBJ);
-        
+
         this.setSize(600,600);
     
     }

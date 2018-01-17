@@ -22,18 +22,19 @@ import javax.swing.*;
  */
 //public class ToolBar extends JPanel implements ActionListener {
   public class ToolBar extends JPanel{  
-    JButton Btnpen, Btnnewpage, Btnnewrect, Btnimg;
+    JButton Btnpen, Btnnewpage, Btnnewrect, Btnimg, Btntext;
     
     
     
     ToolBar(EasyPainter ep) throws MalformedURLException{
  
-        this.setLayout(new GridLayout(4, 1));
+        this.setLayout(new GridLayout(5, 1));
         
         Btnpen = new JButton("Pen");
         Btnnewpage = new JButton("NewPage");
         Btnnewrect = new JButton("Rect");
         Btnimg = new JButton("Img");
+        Btntext = new JButton("Text");
         
 //        Btnpen.addActionListener(this);
 //        Btnnewpage.addActionListener(this);
@@ -117,6 +118,22 @@ import javax.swing.*;
             }
         });
         this.add(Btnimg);
+        
+        Btntext.addMouseListener(new MouseAdapter() {
+            public void mouseClicked(MouseEvent e) {
+                
+                Text t = new Text();
+                ep.activePage.add(t);
+                ep.activePage.revalidate();
+                
+                ep.parametersBar.status = Status.ToolBarText;
+                ep.parametersBar.setToolBarText();
+                System.out.println("success Btnimg");
+                
+            }
+        });
+        this.add(Btntext);
+        
         
         this.setSize(100,600);
         

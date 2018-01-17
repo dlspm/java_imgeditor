@@ -98,6 +98,15 @@ import javax.swing.*;
         
         this.revalidate();
     }
+    
+    public void setToolBarText(){
+        Btnsele.setVisible(true);
+        Jtfline.setVisible(false);
+        Jtfcolor.setVisible(true);
+        Jtfsize.setVisible(true);
+        
+        this.revalidate();
+    }
 
 //    @Override
 //    public void focusGained(FocusEvent e) {

@@ -11,7 +11,7 @@ package test_icon;
  */
 public enum Status {
     Drawing,Selection,
-    CreatingOBJ, EllipseOBJ,
+    CreatingOBJ, EllipseOBJ, PeningOBJ, RectingOBJ, ImgingOBJ, TextingOBJ, DowingOBJ, IconingOBJ,
     Activated, Inactivated, MovingOBJ, Moving,
     Ready2Resize, Resizing ,
     

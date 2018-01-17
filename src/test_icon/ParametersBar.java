@@ -4,8 +4,10 @@
  * and open the template in the editor.
  */
 package test_icon;
+import test_icon.ImgPage;
 
 import java.awt.GridLayout;
+import java.awt.Point;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
 import java.awt.event.KeyEvent;
@@ -14,8 +16,13 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
+import java.net.MalformedURLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.*;
 import static javax.swing.JFrame.EXIT_ON_CLOSE;
+
+
 
 /**
  *
@@ -23,41 +30,55 @@ import static javax.swing.JFrame.EXIT_ON_CLOSE;
  */
 //public class ParametersBar extends JPanel implements FocusListener{
   public class ParametersBar extends JPanel{  
-    JTextField Jtfsize, Jtfcolor, Jtfline;
+    JTextField Jtfsize, Jtfcolor, Jtfline, Jftimgpath;
     JButton Btnbig, Btnsmall, Btnall, Btnchoose;
     public Status status;
+    public EasyPainter p;
     
     
-      JButton jb1, jb2;
-      JTextField jtf1, jtf2, jtf3;
+    JButton jb1, jb2;
+    JTextField jtf1, jtf2, jtf3;
+//    ImgPage ip = new ImgPage();
     
     ParametersBar(EasyPainter ep){
-        this.setLayout(new GridLayout(7, 1));
-
+        this.setLayout(new GridLayout(8, 1));
+        p=ep;
         status = Status.ToolBarNewPage; //因為一定是從 NewPage 開始
         
         Jtfsize = new JTextField(15);
         Jtfcolor = new JTextField(15);
         Jtfline = new JTextField(15);
+        Jftimgpath = new JTextField(15);
+        
         String info1 = "輸入大小";
         String info2 = "輸入顏色";
         String info3 = "輸入粗細";
+        String info4 = "輸入圖片名稱";
+        
         Jtfsize.setText(info1);
         Jtfcolor.setText(info2);
         Jtfline.setText(info3);
+        Jftimgpath.setText(info4);
+        
         this.add(Jtfsize);
         this.add(Jtfcolor);
         this.add(Jtfline);
+        this.add(Jftimgpath);
+        
         Jtfsize.addFocusListener(new MyFocusListener(info1, Jtfsize));//添加焦点事件反映  
         Jtfcolor.addFocusListener(new MyFocusListener(info2, Jtfcolor));
         Jtfline.addFocusListener(new MyFocusListener(info3, Jtfline));
+        Jftimgpath.addFocusListener(new MyFocusListener(info4, Jftimgpath));
+        
         Jtfsize.addKeyListener(new MyKeyListener(Jtfsize));
         Jtfcolor.addKeyListener(new MyKeyListener(Jtfcolor));
         Jtfline.addKeyListener(new MyKeyListener(Jtfline));
+        Jftimgpath.addKeyListener(new MyKeyListener(Jftimgpath));
+        
         Jtfsize.setVisible(false);
         Jtfcolor.setVisible(false);
         Jtfline.setVisible(false);
-        
+        Jftimgpath.setVisible(false);
         
         Btnbig = new JButton("變大");
         Btnbig.setVisible(false);
@@ -143,6 +164,7 @@ import static javax.swing.JFrame.EXIT_ON_CLOSE;
     }
     //ToolBarPan, ToolBarNewPage, ToolBarRect, ToolBarImg
     public void setToolBarPan(){//Btnbig, Btnsmall, Btnall, Btnchoose;
+        Jftimgpath.setVisible(false);
         Btnbig.setVisible(false);
         Btnsmall.setVisible(false);
         Btnall.setVisible(false);
@@ -155,6 +177,7 @@ import static javax.swing.JFrame.EXIT_ON_CLOSE;
     }
     
     public void setToolBarNewPage(){
+        Jftimgpath.setVisible(false);
         Btnbig.setVisible(false);
         Btnsmall.setVisible(false);
         Btnall.setVisible(false);
@@ -163,10 +186,12 @@ import static javax.swing.JFrame.EXIT_ON_CLOSE;
         Jtfcolor.setVisible(false);
         Jtfsize.setVisible(false);
         
+        
         this.revalidate();
     }
     
     public void setToolBarRect(){
+        Jftimgpath.setVisible(false);
         Btnbig.setVisible(false);
         Btnsmall.setVisible(false);
         Btnall.setVisible(false);
@@ -179,6 +204,7 @@ import static javax.swing.JFrame.EXIT_ON_CLOSE;
     }
     
     public void setToolBarImg(){
+        Jftimgpath.setVisible(true);
         Btnbig.setVisible(true);
         Btnsmall.setVisible(true);
         Btnall.setVisible(false);
@@ -191,6 +217,7 @@ import static javax.swing.JFrame.EXIT_ON_CLOSE;
     }
     
     public void setToolBarText(){
+        Jftimgpath.setVisible(false);
         Btnbig.setVisible(false);
         Btnsmall.setVisible(false);
         Btnall.setVisible(false);
@@ -203,6 +230,7 @@ import static javax.swing.JFrame.EXIT_ON_CLOSE;
     }
     
     public void setToolBarDow(){
+        Jftimgpath.setVisible(false);
         Btnbig.setVisible(false);
         Btnsmall.setVisible(false);
         Btnall.setVisible(true);
@@ -215,6 +243,7 @@ import static javax.swing.JFrame.EXIT_ON_CLOSE;
     }
     
     public void setToolBarIcon(){
+        Jftimgpath.setVisible(false);
         Btnbig.setVisible(false);
         Btnsmall.setVisible(false);
         Btnall.setVisible(false);
@@ -227,6 +256,7 @@ import static javax.swing.JFrame.EXIT_ON_CLOSE;
     }
     
     public void setToolBarSele(){
+        Jftimgpath.setVisible(false);
         Btnbig.setVisible(false);
         Btnsmall.setVisible(false);
         Btnall.setVisible(false);
@@ -249,7 +279,6 @@ import static javax.swing.JFrame.EXIT_ON_CLOSE;
         public void mouseMoved(MouseEvent e) {
         }
     
-    
     }
     
 //    JButton Btnbig, Btnsmall, Btnall, Btnchoose;
@@ -259,8 +288,12 @@ import static javax.swing.JFrame.EXIT_ON_CLOSE;
         @Override
         public void mouseClicked(MouseEvent e) {
             if(e.getSource() == Btnbig){
-            
+                Point x ;
                 System.out.println("變大");
+                x = p.activePage.activeOBJ.getLocation();
+                p.activePage.activeOBJ.setLocation((x.x)+20, (x.y)+20);
+                
+                
             }else if(e.getSource() == Btnsmall){
                 System.out.println("變小");
             }else if(e.getSource() == Btnall){
@@ -288,7 +321,7 @@ import static javax.swing.JFrame.EXIT_ON_CLOSE;
     
     
     }
-    
+    //Jtfsize, Jtfcolor, Jtfline, Jftimgpath;
     class MyKeyListener  implements KeyListener{
         JTextField jtf;
         public MyKeyListener(JTextField jtf){
@@ -309,19 +342,31 @@ import static javax.swing.JFrame.EXIT_ON_CLOSE;
             if(e.getKeyCode() == KeyEvent.VK_ENTER){
                 System.out.println("！！！！！！！！"+temp);
 //                jtf.setText(""); //會有 Error
-                System.out.println("！！！！！！！！"+e.getSource());
+                
                 //要去啟動 更改 ImgPage ToolBar 
+                if(e.getSource() == Jtfsize){
+                    
+                }else if(e.getSource() == Jtfcolor){
+                    
+                }else if(e.getSource() == Jtfline){
+                    
+                }else if(e.getSource() == Jftimgpath){
+                    try {
+                        System.out.println("！！！！！！！！"+"Jftimgpath" + temp);
+//                   
+                        Img no = new Img(temp);
+                        p.activePage.addOBJ(no);
+                        p.activePage.activeOBJ = no;
+                    } catch (MalformedURLException ex) {
+                        Logger.getLogger(ParametersBar.class.getName()).log(Level.SEVERE, null, ex);
+                    }
 
+                }
+                
             }
         }
     }
-//           Btnbig.setVisible(false);
-//        Btnsmall.setVisible(false);
-//        Btnall.setVisible(false);
-//        Btnchoose.setVisible(false);
-//        Jtfline.setVisible(false);
-//        Jtfcolor.setVisible(false);
-//        Jtfsize.setVisible(false);
+
 
     class MyFocusListener implements FocusListener {
 
@@ -337,10 +382,6 @@ import static javax.swing.JFrame.EXIT_ON_CLOSE;
         public void focusGained(FocusEvent e) {//获得焦点的时候,清空提示文字  
             String temp = jtf.getText();
             
-            if(e.getSource() == Jtfsize){
-                info = Jtfsize.getText();
-            }
-            
             if (temp.equals(info)) {
                 jtf.setText("");
             }
@@ -349,10 +390,6 @@ import static javax.swing.JFrame.EXIT_ON_CLOSE;
         @Override
         public void focusLost(FocusEvent e) {//失去焦点的时候,判断如果为空,就显示提示文字  
             String temp = jtf.getText();
-            
-            if(e.getSource() == Jtfsize){
-                info = Jtfsize.getText();
-            }
             
             if (temp.equals("")) {
                 jtf.setText(info);

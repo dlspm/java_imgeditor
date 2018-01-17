@@ -39,8 +39,9 @@ public class Text extends JTextPane{
 //        txaDisplay.setOpaque(false);
        
         setDocs("第一行的文字", Color.red, false, 20);
-        this.setOpaque(false);
         
+        this.setOpaque(false);
+        this.setLocation(10, 10);
 //        this.add(txaDisplay);
 
 //        this.setBorder(txaDisplay);

@@ -27,18 +27,19 @@ public class Img extends easyOBJ{
     Img(String su) throws MalformedURLException{
     
         status = Status.Activated;
+        Point x , y;
+//        URL url = new URL(su);
+        ImageIcon imc = new ImageIcon(su);
         
-        URL url = new URL(su);
-        ImageIcon imc = new ImageIcon(url);
+        System.out.println("add Img OK");
         
         Jlaimg = new JLabel(imc);
         Jlaimg.setIcon(imc);
         Jlaimg.setBounds(0, 0, imc.getIconWidth(), imc.getIconHeight());
         this.add(Jlaimg);
         this.setSize( imc.getIconWidth(), imc.getIconHeight());
-        
-        
-    
+        x= this.getLocation();
+        this.setLocation(x);
     }
     
 }

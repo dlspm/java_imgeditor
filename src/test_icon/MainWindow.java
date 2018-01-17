@@ -7,6 +7,7 @@ package test_icon;
 
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Container;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -38,6 +39,7 @@ public class MainWindow extends JFrame{  //用extends 去繼承 Frame
         cpanel.add(mb, BorderLayout.SOUTH);
     }
     void setImgPage(ImgPage ip){
+//        ip.setBackground(Color.yellow);
         cpanel.add(ip, BorderLayout.CENTER);
     }
     void setParametersBar(ParametersBar p){

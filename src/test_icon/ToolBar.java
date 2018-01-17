@@ -48,9 +48,10 @@ import javax.swing.*;
         {
             public void mouseClicked(MouseEvent e){
                 
-                
-                ep.parametersBar.status = Status.ToolBarPan;
-                ep.parametersBar.setToolBarPan();
+                if(ep.activePage!=null){
+                    ep.parametersBar.status = Status.ToolBarPan;
+                    ep.parametersBar.setToolBarPan();
+                }
                 System.out.println("success Pan");
             }
         });
@@ -73,11 +74,13 @@ import javax.swing.*;
                     
                     ep.curPages = ++ep.numPages;
                     ep.megBar.updateInfo(ep.curPages, ep.numPages);
-                    ep.mainWin.cpanel.revalidate();
+                    //ep.mainWin.cpanel.revalidate();
                     
                     
-                    ep.parametersBar.status = Status.ToolBarNewPage;
-                    ep.parametersBar.setToolBarNewPage();
+                    if(ep.activePage!=null){
+                        ep.parametersBar.status = Status.ToolBarNewPage;
+                        ep.parametersBar.setToolBarNewPage();
+                    }
                     System.out.println("success newPage");
                     
                 } catch (MalformedURLException ex) {
@@ -93,9 +96,10 @@ import javax.swing.*;
         Btnnewrect.addMouseListener(new MouseAdapter() {
             public void mouseClicked(MouseEvent e) {
                 
-                
-                ep.parametersBar.status = Status.ToolBarRect;
-                ep.parametersBar.setToolBarRect();
+                if(ep.activePage!=null){
+                    ep.parametersBar.status = Status.ToolBarRect;
+                    ep.parametersBar.setToolBarRect();
+                }
                 System.out.println("success Rect");
             }
         });
@@ -106,15 +110,43 @@ import javax.swing.*;
             public void mouseClicked(MouseEvent e) {
                 
                 try {
-                    Img no = new Img("https://d2hsbzg80yxel6.cloudfront.net/images/69511/medium/16639037694fbdf3c729b5b.jpg");
+                    //                try {
+//                    Img no = new Img("https://d2hsbzg80yxel6.cloudfront.net/images/69511/medium/16639037694fbdf3c729b5b.jpg");
+//                    ep.activePage.addOBJ(no);
+//                    ep.activePage.activeOBJ = no;
+//                    
+////                    ep.activePage.add(no);
+//                  //  ep.activePage.revalidate();
+//                    
+//                    if(ep.activePage!=null){
+//                        ep.parametersBar.status = Status.ToolBarImg;
+//                        ep.parametersBar.setToolBarImg();
+//                    }
+//                    System.out.println("success Img");
+//                    
+//                } catch (MalformedURLException ex) {
+//                    Logger.getLogger(ToolBar.class.getName()).log(Level.SEVERE, null, ex);
+//                }
+
+
+                    //載入圖片
+                    Img no = new Img("tt.jpg");
                     ep.activePage.addOBJ(no);
-//                    ep.activePage.add(no);
-                    ep.activePage.revalidate();
-                    
+                    ep.activePage.activeOBJ = no;
+
+                    //                    ep.activePage.add(no);
+                    //  ep.activePage.revalidate();
+                    if (ep.activePage != null) {
+                        ep.parametersBar.status = Status.ToolBarImg;
+                        ep.parametersBar.setToolBarImg();
+                    }
+                    System.out.println("success Img");
+
+
+
                     ep.parametersBar.status = Status.ToolBarImg;
                     ep.parametersBar.setToolBarImg();
                     System.out.println("success Img");
-                    
                 } catch (MalformedURLException ex) {
                     Logger.getLogger(ToolBar.class.getName()).log(Level.SEVERE, null, ex);
                 }
@@ -124,14 +156,17 @@ import javax.swing.*;
         
         Btntext.addMouseListener(new MouseAdapter() {
             public void mouseClicked(MouseEvent e) {
+                if(ep.activePage!=null){
+                    Text t = new Text();
+                    ep.activePage.add(t);
+                    ep.activePage.revalidate();
+
+                    ep.parametersBar.status = Status.ToolBarText;
+                    ep.parametersBar.setToolBarText();
+                    
+                    System.out.println("success Text");
+                }
                 
-                Text t = new Text();
-                ep.activePage.add(t);
-                ep.activePage.revalidate();
-                
-                ep.parametersBar.status = Status.ToolBarText;
-                ep.parametersBar.setToolBarText();
-                System.out.println("success Text");
                 
             }
         });
@@ -139,13 +174,11 @@ import javax.swing.*;
         
         Btndow.addMouseListener(new MouseAdapter() {
             public void mouseClicked(MouseEvent e) {
-                
-//                Text t = new Text();
-//                ep.activePage.add(t);
-//                ep.activePage.revalidate();
-                
-                ep.parametersBar.status = Status.ToolBarDow;
-                ep.parametersBar.setToolBarDow();
+                if(ep.activePage!=null){
+                    ep.parametersBar.status = Status.ToolBarDow;
+                    ep.parametersBar.setToolBarDow();
+                }
+//                ep.activePage.revalidate();                
                 System.out.println("success Dow");
                 
             }
@@ -155,12 +188,11 @@ import javax.swing.*;
         Btnicon.addMouseListener(new MouseAdapter() {
             public void mouseClicked(MouseEvent e) {
                 
-//                Text t = new Text();
-//                ep.activePage.add(t);
-//                ep.activePage.revalidate();
-                
-                ep.parametersBar.status = Status.ToolBarIcon;
-                ep.parametersBar.setToolBarIcon();
+                if(ep.activePage!=null){
+                    ep.parametersBar.status = Status.ToolBarIcon;
+                    ep.parametersBar.setToolBarIcon();
+                    //                ep.activePage.revalidate();
+                }
                 System.out.println("success Icon");
                 
             }
@@ -170,12 +202,13 @@ import javax.swing.*;
         
         Btnsele.addMouseListener(new MouseAdapter() {
             public void mouseClicked(MouseEvent e) {
-
-//                Text t = new Text();
-//                ep.activePage.add(t);
-//                ep.activePage.revalidate();
-                ep.parametersBar.status = Status.ToolBarSele;
-                ep.parametersBar.setToolBarSele();
+                if(ep.activePage!=null){
+    //                Text t = new Text();
+    //                ep.activePage.add(t);
+    //                ep.activePage.revalidate();
+                    ep.parametersBar.status = Status.ToolBarSele;
+                    ep.parametersBar.setToolBarSele();
+                }
                 System.out.println("success Selected");
 
             }

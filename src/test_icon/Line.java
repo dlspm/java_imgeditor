@@ -5,10 +5,17 @@
  */
 package test_icon;
 
+import java.awt.*;
+
 /**
  *
  * @author angus
  */
-public class HintTextFieldUI {
-    
+public class Line {
+    Point sp, ep;
+    Line(Point s,Point e)
+    {
+        sp=s;
+        ep=e;
+    }
 }

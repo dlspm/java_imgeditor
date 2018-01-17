@@ -1,4 +1,8 @@
-
+當點擊 ToolBar 上面 JButton 時（mouseClicked）：
+if(ep.activePage!=null)
+{
+	ep.activePage.status = Status.CreatingOBJ; //給相對應的狀態
+}
 
 
 

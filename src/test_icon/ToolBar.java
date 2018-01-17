@@ -22,7 +22,7 @@ import javax.swing.*;
  */
 //public class ToolBar extends JPanel implements ActionListener {
   public class ToolBar extends JPanel{  
-    JButton Btnpen, Btnnewpage, Btnnewrect, Btnimg, Btntext, Btndow, Btnicon, Btnsele;
+    JButton Btnpen, Btnnewpage, Btnnewrect, Btnimg, Btntext, Btndow, Btnicon, Btnsele, Btndel;
     
     
     
@@ -38,6 +38,7 @@ import javax.swing.*;
         Btndow = new JButton("Dow");
         Btnicon = new JButton("Icon");
         Btnsele = new JButton("Select");
+        Btndel = new JButton("Delete");
         
 //        Btnpen.addActionListener(this);
 //        Btnnewpage.addActionListener(this);
@@ -144,9 +145,6 @@ import javax.swing.*;
 
 
 
-                    ep.parametersBar.status = Status.ToolBarImg;
-                    ep.parametersBar.setToolBarImg();
-                    System.out.println("success Img");
                 } catch (MalformedURLException ex) {
                     Logger.getLogger(ToolBar.class.getName()).log(Level.SEVERE, null, ex);
                 }
@@ -203,9 +201,7 @@ import javax.swing.*;
         Btnsele.addMouseListener(new MouseAdapter() {
             public void mouseClicked(MouseEvent e) {
                 if(ep.activePage!=null){
-    //                Text t = new Text();
-    //                ep.activePage.add(t);
-    //                ep.activePage.revalidate();
+
                     ep.parametersBar.status = Status.ToolBarSele;
                     ep.parametersBar.setToolBarSele();
                 }
@@ -215,7 +211,22 @@ import javax.swing.*;
         });
         this.add(Btnsele);
          
-        
+        Btndel.addMouseListener(new MouseAdapter() {
+            public void mouseClicked(MouseEvent e) {
+                if (ep.activePage != null) {
+
+                    if (ep.activePage.activeOBJ != null) {
+                        ep.activePage.remove(ep.activePage.activeOBJ);
+                        ep.activePage.activeOBJ = null;
+                        ep.activePage.repaint();
+                    }
+                    
+                }
+                System.out.println("success Selected");
+
+            }
+        });
+        this.add(Btndel);
         
         this.setSize(100,600);
         

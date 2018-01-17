@@ -16,6 +16,6 @@ public enum Status {
     Ready2Resize, Resizing ,
     
     //為了讓 ToolBar 有相對應的 ParametersBar
-    ToolBarPan, ToolBarNewPage, ToolBarRect, ToolBarImg, ToolBarText, ToolBarDow, ToolBarIcon, ToolBarSele
+    ToolBarPan, ToolBarNewPage, ToolBarRect, ToolBarImg, ToolBarText, ToolBarDow, ToolBarIcon, ToolBarSele, ToolBarDele
     
 }

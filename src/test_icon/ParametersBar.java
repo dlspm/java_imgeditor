@@ -8,9 +8,12 @@ package test_icon;
 import java.awt.GridLayout;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import javax.swing.*;
+import static javax.swing.JFrame.EXIT_ON_CLOSE;
 
 /**
  *
@@ -22,26 +25,29 @@ import javax.swing.*;
     JButton Btnbig, Btnsmall, Btnall, Btnchoose;
     public Status status;
     
+    
+      JButton jb1, jb2;
+      JTextField jtf1, jtf2, jtf3;
+    
     ParametersBar(EasyPainter ep){
         this.setLayout(new GridLayout(7, 1));
 
         status = Status.ToolBarNewPage; //因為一定是從 NewPage 開始
         
-        
-        Jtfsize = new JTextField(7);
-        Jtfsize.setText("輸入大小");
-        Jtfsize.setVisible(false);
-        Jtfcolor = new JTextField(7);
-        Jtfcolor.setText("輸入顏色");
-        Jtfcolor.setVisible(false);
-        Jtfline = new JTextField(7);
-        Jtfline.setText("輸入粗細");
-        Jtfline.setVisible(false);
-        
-//        Jtfsize.addFocusListener(this);
-//        Jtfcolor.addFocusListener(this);
-//        Jtfline.addFocusListener(this);
-        
+//        Jtfsize = new JTextField("輸入大小", 7);
+////        Jtfsize.setText("輸入大小");
+//        Jtfsize.setVisible(false);
+//        this.add(Jtfsize);
+////        Jtfsize.addKeyListener(this);
+//        Jtfcolor = new JTextField("輸入顏色", 7);
+////        Jtfcolor.setText("輸入顏色");
+//        Jtfcolor.setVisible(false);
+////        Jtfcolor.addKeyListener(this);
+//        Jtfline = new JTextField("輸入粗細", 7);
+////        Jtfline.setText("輸入粗細");
+//        Jtfline.setVisible(false);
+////        Jtfline.addKeyListener(this);
+//        
         Btnbig = new JButton("變大");
         Btnbig.setVisible(false);
         Btnsmall = new JButton("變小");
@@ -50,12 +56,22 @@ import javax.swing.*;
         Btnall.setVisible(false);
         Btnchoose = new JButton("選取");
         Btnchoose.setVisible(false);
+//        
+//        
+//
+//        this.add(Jtfsize);
+//        this.add(Jtfcolor);
+//        this.add(Jtfline);
+//        
+//        Jtfsize.addFocusListener(new MyFocusListener("輸入大小", Jtfline));
+//        Jtfcolor.addFocusListener(new MyFocusListener("輸入顏色", Jtfline));
+//        Jtfline.addFocusListener(new MyFocusListener("輸入粗細", Jtfline));
+//
+//        Jtfsize.addKeyListener(new MyKeyListener(Jtfsize));
+//        Jtfcolor.addKeyListener(new MyKeyListener(Jtfcolor));
+//        Jtfline.addKeyListener(new MyKeyListener(Jtfline));
         
         
-
-        this.add(Jtfsize);
-        this.add(Jtfcolor);
-        this.add(Jtfline);
         this.add(Btnbig);
         Btnbig.addMouseListener(new MouseAdapter()
         {
@@ -66,7 +82,7 @@ import javax.swing.*;
         
         });
         
-        this.add(Btnbig);
+        this.add(Btnsmall);
         Btnsmall.addMouseListener(new MouseAdapter()
         {
             public void mouseClicked(MouseEvent e)
@@ -76,9 +92,7 @@ import javax.swing.*;
         
         });
         
-        this.add(Btnsmall);
-        
-        
+        this.add(Btnall);
         Btnall.addMouseListener(new MouseAdapter()
         {
             public void mouseClicked(MouseEvent e)
@@ -88,7 +102,7 @@ import javax.swing.*;
         
         });
         
-        this.add(Btnall);
+        this.add(Btnchoose);
         Btnchoose.addMouseListener(new MouseAdapter()
         {
             public void mouseClicked(MouseEvent e)
@@ -97,7 +111,53 @@ import javax.swing.*;
             }
         
         });
-        this.add(Btnchoose);
+        
+
+//Jtfsize, Jtfcolor, Jtfline;
+
+        Jtfsize = new JTextField(10);
+        Jtfcolor = new JTextField(10);
+        Jtfline = new JTextField(10);
+        String info1 = "輸入大小";
+        String info2 = "輸入顏色";
+        String info3 = "輸入粗細";
+        Jtfsize.setText(info1);
+        Jtfcolor.setText(info2);
+        Jtfline.setText(info3);
+        this.add(Jtfsize);
+        this.add(Jtfcolor);
+        this.add(Jtfline);
+        Jtfsize.addFocusListener(new MyFocusListener(info1, Jtfsize));//添加焦点事件反映  
+        Jtfcolor.addFocusListener(new MyFocusListener(info2, Jtfcolor));
+        Jtfline.addFocusListener(new MyFocusListener(info3, Jtfline));
+        Jtfsize.addKeyListener(new MyKeyListener(Jtfsize));
+        Jtfcolor.addKeyListener(new MyKeyListener(Jtfcolor));
+        Jtfline.addKeyListener(new MyKeyListener(Jtfline));
+        Jtfsize.setVisible(false);
+        Jtfcolor.setVisible(false);
+        Jtfline.setVisible(false);
+
+        //test：
+//        jtf1 = new JTextField(10);
+//        jtf2 = new JTextField(10);
+//        jtf3 = new JTextField(10);
+//        String info1 = "请输入 [账号]";
+//        String info2 = "请输入 <密码>";
+//        String info3 = "fuck";
+//        jtf1.setText(info1);
+//        jtf2.setText(info2);
+//        jtf3.setText(info3);
+//        this.add(jtf1);
+//        this.add(jtf2);
+//        this.add(jtf3);
+//        jtf1.addFocusListener(new MyFocusListener(info1, jtf1));//添加焦点事件反映  
+//        jtf2.addFocusListener(new MyFocusListener(info2, jtf2));
+//        jtf3.addFocusListener(new MyFocusListener(info3, jtf3));
+//        jtf1.addKeyListener(new MyKeyListener(jtf1));
+//        jtf2.addKeyListener(new MyKeyListener(jtf2));
+//        jtf3.addKeyListener(new MyKeyListener(jtf3));
+
+
 
         this.setSize(100, 600);
     
@@ -199,38 +259,76 @@ import javax.swing.*;
         this.revalidate();
     }
 
-//    @Override
-//    public void focusGained(FocusEvent e) {
-//        
-//        
-////        if(e.getSource() == Jtfsize){
-////            Jtfsize.setText("");
-////        }else if(e.getSource() == Jtfcolor){
-////            Jtfcolor.setText("");
-////        }else if(e.getSource() == Jtfline){
-////            Jtfline.setText("");
-////        }
-//        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-//    }
-//
-//    @Override
-//    public void focusLost(FocusEvent e) {
-//        
-//        
-////        if (e.getSource() == Jtfsize) {
-////            if(Jtfsize.getText() == ""){
-////                Jtfsize.setText("Input size");
-////            }
-////        } else if (e.getSource() == Jtfcolor) {
-////            if(Jtfcolor.getText() == ""){
-////                Jtfcolor.setText("Input color");
-////            }
-////        } else if (e.getSource() == Jtfline) {
-////            if(Jtfline.getText() == ""){
-////                Jtfline.setText("Input line");
-////            }
-////        }
-//        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-//    }
+    
+    class MyKeyListener  implements KeyListener{
+        JTextField jtf;
+        public MyKeyListener(JTextField jtf){
+            this.jtf = jtf;
+        }
+        
+        @Override
+        public void keyTyped(KeyEvent e) {
+        }
+
+        @Override
+        public void keyPressed(KeyEvent e) {
+        }
+
+        @Override
+        public void keyReleased(KeyEvent e) {
+            String temp = jtf.getText();
+            if(e.getKeyCode() == KeyEvent.VK_ENTER){
+                System.out.println("！！！！！！！！"+temp);
+//                jtf.setText(""); //會有 Error
+                System.out.println("！！！！！！！！"+e.getSource());
+                //要去啟動 更改 ImgPage ToolBar 
+
+            }
+        }
+    }
+//           Btnbig.setVisible(false);
+//        Btnsmall.setVisible(false);
+//        Btnall.setVisible(false);
+//        Btnchoose.setVisible(false);
+//        Jtfline.setVisible(false);
+//        Jtfcolor.setVisible(false);
+//        Jtfsize.setVisible(false);
+
+    class MyFocusListener implements FocusListener {
+
+        String info;
+        JTextField jtf;
+
+        public MyFocusListener(String info, JTextField jtf) {
+            this.info = info;
+            this.jtf = jtf;
+        }
+
+        @Override
+        public void focusGained(FocusEvent e) {//获得焦点的时候,清空提示文字  
+            String temp = jtf.getText();
+            
+            if(e.getSource() == Jtfsize){
+                info = Jtfsize.getText();
+            }
+            
+            if (temp.equals(info)) {
+                jtf.setText("");
+            }
+        }
+
+        @Override
+        public void focusLost(FocusEvent e) {//失去焦点的时候,判断如果为空,就显示提示文字  
+            String temp = jtf.getText();
+            
+            if(e.getSource() == Jtfsize){
+                info = Jtfsize.getText();
+            }
+            
+            if (temp.equals("")) {
+                jtf.setText(info);
+            }
+        }
+    }
     
 }

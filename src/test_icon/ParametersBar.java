@@ -12,6 +12,8 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import java.awt.event.MouseMotionListener;
 import javax.swing.*;
 import static javax.swing.JFrame.EXIT_ON_CLOSE;
 
@@ -34,90 +36,9 @@ import static javax.swing.JFrame.EXIT_ON_CLOSE;
 
         status = Status.ToolBarNewPage; //因為一定是從 NewPage 開始
         
-//        Jtfsize = new JTextField("輸入大小", 7);
-////        Jtfsize.setText("輸入大小");
-//        Jtfsize.setVisible(false);
-//        this.add(Jtfsize);
-////        Jtfsize.addKeyListener(this);
-//        Jtfcolor = new JTextField("輸入顏色", 7);
-////        Jtfcolor.setText("輸入顏色");
-//        Jtfcolor.setVisible(false);
-////        Jtfcolor.addKeyListener(this);
-//        Jtfline = new JTextField("輸入粗細", 7);
-////        Jtfline.setText("輸入粗細");
-//        Jtfline.setVisible(false);
-////        Jtfline.addKeyListener(this);
-//        
-        Btnbig = new JButton("變大");
-        Btnbig.setVisible(false);
-        Btnsmall = new JButton("變小");
-        Btnsmall.setVisible(false);
-        Btnall = new JButton("全部");
-        Btnall.setVisible(false);
-        Btnchoose = new JButton("選取");
-        Btnchoose.setVisible(false);
-//        
-//        
-//
-//        this.add(Jtfsize);
-//        this.add(Jtfcolor);
-//        this.add(Jtfline);
-//        
-//        Jtfsize.addFocusListener(new MyFocusListener("輸入大小", Jtfline));
-//        Jtfcolor.addFocusListener(new MyFocusListener("輸入顏色", Jtfline));
-//        Jtfline.addFocusListener(new MyFocusListener("輸入粗細", Jtfline));
-//
-//        Jtfsize.addKeyListener(new MyKeyListener(Jtfsize));
-//        Jtfcolor.addKeyListener(new MyKeyListener(Jtfcolor));
-//        Jtfline.addKeyListener(new MyKeyListener(Jtfline));
-        
-        
-        this.add(Btnbig);
-        Btnbig.addMouseListener(new MouseAdapter()
-        {
-            public void mouseClicked(MouseEvent e)
-            {
-                System.out.println("變大");
-            }
-        
-        });
-        
-        this.add(Btnsmall);
-        Btnsmall.addMouseListener(new MouseAdapter()
-        {
-            public void mouseClicked(MouseEvent e)
-            {
-                System.out.println("變小");
-            }
-        
-        });
-        
-        this.add(Btnall);
-        Btnall.addMouseListener(new MouseAdapter()
-        {
-            public void mouseClicked(MouseEvent e)
-            {
-                System.out.println("全部");
-            }
-        
-        });
-        
-        this.add(Btnchoose);
-        Btnchoose.addMouseListener(new MouseAdapter()
-        {
-            public void mouseClicked(MouseEvent e)
-            {
-                System.out.println("選取");
-            }
-        
-        });
-        
-
-//Jtfsize, Jtfcolor, Jtfline;
-
-        Jtfsize = new JTextField(10);
-        Jtfcolor = new JTextField(10);
-        Jtfline = new JTextField(10);
+        Jtfsize = new JTextField(15);
+        Jtfcolor = new JTextField(15);
+        Jtfline = new JTextField(15);
         String info1 = "輸入大小";
         String info2 = "輸入顏色";
         String info3 = "輸入粗細";
@@ -136,6 +57,64 @@ import static javax.swing.JFrame.EXIT_ON_CLOSE;
         Jtfsize.setVisible(false);
         Jtfcolor.setVisible(false);
         Jtfline.setVisible(false);
+        
+        
+        Btnbig = new JButton("變大");
+        Btnbig.setVisible(false);
+        Btnsmall = new JButton("變小");
+        Btnsmall.setVisible(false);
+        Btnall = new JButton("全部");
+        Btnall.setVisible(false);
+        Btnchoose = new JButton("選取");
+        Btnchoose.setVisible(false);
+        
+        
+        this.add(Btnbig);
+        Btnbig.addMouseListener(new MyMouseListener());
+//        Btnbig.addMouseListener(new MouseAdapter()
+//        {
+//            public void mouseClicked(MouseEvent e)
+//            {
+//                System.out.println("變大");
+//            }
+//        
+//        });
+        
+        this.add(Btnsmall);
+        Btnsmall.addMouseListener(new MyMouseListener());
+//        Btnsmall.addMouseMotionListener(l);
+//        Btnsmall.addMouseListener(new MouseAdapter()
+//        {
+//            public void mouseClicked(MouseEvent e)
+//            {
+//                System.out.println("變小");
+//            }
+//        
+//        });
+        
+        this.add(Btnall);
+        Btnall.addMouseListener(new MyMouseListener());
+//        Btnall.addMouseListener(new MouseAdapter()
+//        {
+//            public void mouseClicked(MouseEvent e)
+//            {
+//                System.out.println("全部");
+//            }
+//        
+//        });
+        
+        this.add(Btnchoose);
+        Btnchoose.addMouseListener(new MyMouseListener());
+//        Btnchoose.addMouseListener(new MouseAdapter()
+//        {
+//            public void mouseClicked(MouseEvent e)
+//            {
+//                System.out.println("選取");
+//            }
+//        
+//        });
+        
+        
 
         //test：
 //        jtf1 = new JTextField(10);
@@ -259,6 +238,56 @@ import static javax.swing.JFrame.EXIT_ON_CLOSE;
         this.revalidate();
     }
 
+    
+    class MyMouseMotionListener implements MouseMotionListener{
+
+        @Override
+        public void mouseDragged(MouseEvent e) {
+        }
+
+        @Override
+        public void mouseMoved(MouseEvent e) {
+        }
+    
+    
+    }
+    
+//    JButton Btnbig, Btnsmall, Btnall, Btnchoose;
+    
+    class MyMouseListener implements MouseListener{
+
+        @Override
+        public void mouseClicked(MouseEvent e) {
+            if(e.getSource() == Btnbig){
+            
+                System.out.println("變大");
+            }else if(e.getSource() == Btnsmall){
+                System.out.println("變小");
+            }else if(e.getSource() == Btnall){
+                System.out.println("全部");
+            }else if(e.getSource() == Btnchoose){
+                System.out.println("選取");
+            }
+        }
+
+        @Override
+        public void mousePressed(MouseEvent e) {
+        }
+
+        @Override
+        public void mouseReleased(MouseEvent e) {
+        }
+
+        @Override
+        public void mouseEntered(MouseEvent e) {
+        }
+
+        @Override
+        public void mouseExited(MouseEvent e) {
+        }
+    
+    
+    }
     
     class MyKeyListener  implements KeyListener{
         JTextField jtf;

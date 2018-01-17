@@ -16,6 +16,9 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.net.MalformedURLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -230,7 +233,7 @@ import static javax.swing.JFrame.EXIT_ON_CLOSE;
     }
     
     public void setToolBarDow(){
-        Jftimgpath.setVisible(false);
+        Jftimgpath.setVisible(true);
         Btnbig.setVisible(false);
         Btnsmall.setVisible(false);
         Btnall.setVisible(true);
@@ -290,9 +293,9 @@ import static javax.swing.JFrame.EXIT_ON_CLOSE;
             if(e.getSource() == Btnbig){
                 Point x ;
                 System.out.println("變大");
-                x = p.activePage.activeOBJ.getLocation();
-                p.activePage.activeOBJ.setLocation((x.x)+20, (x.y)+20);
-                
+//                x = p.activePage.activeOBJ.getLocation();
+//                p.activePage.activeOBJ.setLocation((x.x)+20, (x.y)+20);
+//                p.activePage.addOBJ(no);
                 
             }else if(e.getSource() == Btnsmall){
                 System.out.println("變小");
@@ -301,6 +304,7 @@ import static javax.swing.JFrame.EXIT_ON_CLOSE;
             }else if(e.getSource() == Btnchoose){
                 System.out.println("選取");
             }
+            
         }
 
         @Override
@@ -351,15 +355,25 @@ import static javax.swing.JFrame.EXIT_ON_CLOSE;
                 }else if(e.getSource() == Jtfline){
                     
                 }else if(e.getSource() == Jftimgpath){
-                    try {
-                        System.out.println("！！！！！！！！"+"Jftimgpath" + temp);
+                    
+                    
+                    if (status == Status.ToolBarImg){
+                        try {
+
+                            System.out.println("！！！！！！！！" + "Jftimgpath" + temp);
 //                   
-                        Img no = new Img(temp);
-                        p.activePage.addOBJ(no);
-                        p.activePage.activeOBJ = no;
-                    } catch (MalformedURLException ex) {
-                        Logger.getLogger(ParametersBar.class.getName()).log(Level.SEVERE, null, ex);
+                            Img no = new Img(temp, p.activePage);
+                            p.activePage.addOBJ(no);
+                            p.activePage.activeOBJ = no;
+                        } catch (MalformedURLException ex) {
+                            Logger.getLogger(ParametersBar.class.getName()).log(Level.SEVERE, null, ex);
+                        }
+                    }else if(status == Status.ToolBarDow){
+                        p.activePage.Dowimg(temp);
                     }
+                    
+                    
+                    
 
                 }
                 

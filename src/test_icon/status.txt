@@ -1,3 +1,55 @@
+
+ImgPage：
+status = Status.Selection;
+
+mouseDragged{
+if(ImpPage.this.status == Status.ToolBarPan){
+
+}else if(ImgPage.this.status == Status.ToolBarRect){
+
+}
+
+
+mousePressed{
+if(status == Status.ToolBarPan){
+}
+}else if(status == Status.ToolBarRect){
+}
+if (ImgPage.this.activeOBJ != null){ //當繪製完成後在 Page 上點擊空白部分
+//把 activeOBJ.status = Status.Inactivated; //代表沒有物件被選取
+		if (ImgPage.this.activeOBJ.status == Status.Activated) {
+                    //Page.this.activeOBJ.outline.setVisible(false);
+                    ImgPage.this.activeOBJ.status = Status.Inactivated;
+                    ImgPage.this.activeOBJ = null;
+                    ImgPage.this.repaint();
+//                    ImgPage.this.revalidate();
+                }
+}
+}
+
+mouseReleased{
+
+	if (ImgPage.this.status == Status.ToolBarPan) {
+	}
+	if (ImgPage.this.status == Status.ToolBarRect) {
+	}
+	if (ImgPage.this.status == Status.EllipseOBJ) {
+	//新增一個物件
+		Oval newOBJ = new Oval(ImgPage.this, fp, cp);
+               ImgPage.this.add(newOBJ);
+               ImgPage.this.activeOBJ = newOBJ;
+               ImgPage.this.repaint();
+	}
+	
+
+
+}
+
+
+
+
+
+ToolBar：
 當點擊 ToolBar 上面 JButton 時（mouseClicked）：
 if(ep.activePage!=null)
 {
@@ -5,9 +57,47 @@ if(ep.activePage!=null)
 }
 
 
+easyOBJ：
+mouseDragged{
+	//計算物件移動
+}
 
+mousePressed{
+if(status==Status.Inactivated){
+	if(parent.activeOBJ!=null)
+	{
+             parent.activeOBJ.status=Status.Inactivated;
+        }
 
+	status=Status.Activated;
+	parent.activeOBJ=easyOBJ.this;
+	parent.repaint();
 
+}else if(status==Status.Activated){
+	System.out.println("2" + parent.activeOBJ.status);
+	if(lp==null)
+		lp=new Point();
+
+	lp.x = e.getXOnScreen();
+	lp.y = e.getYOnScreen();
+	op = easyOBJ.this.getLocation();
+
+                     
+	parent.status=Status.MovingOBJ;
+	status=Status.Moving;
+	//setVisible(false);
+	System.out.println("2" + parent.activeOBJ.status);
+}
+}
+
+mouseReleased(MouseEvent e){
+	System.out.println("mouse released in easyOBJ");
+	if(status==Status.Moving)
+	{
+		status=Status.Activated;
+        }
+}
+}
 
 
 

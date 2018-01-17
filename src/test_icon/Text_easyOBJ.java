@@ -9,24 +9,13 @@ package test_icon;
  *
  * @author angus
  */
-public class Pen extends easyOBJ{
-//    public Pen(ImgPage p) {
-//        super(p);
-//    }
-//    
-//    }
-//    
+public class Text_easyOBJ extends easyOBJ{
+        
+    Text_easyOBJ(){
+    
+        Text t = new Text();
+        this.add(t);
+    
+    }
 
-    
-    
-//    Pen(){
-//    
-//    
-//    
-//    
-//    }
-//    
-    
-    
-    
 }

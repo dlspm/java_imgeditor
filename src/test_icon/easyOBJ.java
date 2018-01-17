@@ -12,12 +12,14 @@ import java.awt.event.MouseEvent;
 import java.net.MalformedURLException;
 import javax.swing.JPanel;
 
-/**
- *
- * @author angus
- */
+
+
 public class easyOBJ extends JPanel {
 
+    
+    
+    
+    EasyPainter ep;
     ImgPage parent;
 //    SelectionOutline outline=null;
     Status status;
@@ -25,6 +27,8 @@ public class easyOBJ extends JPanel {
     Dimension d;
 
     easyOBJ(){ //沒有參數時只會有物件移動的功能
+//        parent = ep.activePage;
+        status = Status.Activated;
         
         this.addMouseMotionListener(new MouseAdapter(){
             public void mouseDragged(MouseEvent e){
@@ -50,13 +54,32 @@ public class easyOBJ extends JPanel {
         
         this.addMouseListener(new MouseAdapter() {
             public void mousePressed(MouseEvent e) {
-                System.out.println("imgPressed");
-                if (lp == null)
-                    lp = new Point();
-                lp.x = e.getXOnScreen();
-                lp.y = e.getYOnScreen();
-                op = easyOBJ.this.getLocation();
-                
+                System.out.println("imgPressed:" + status);
+                if (status == Status.Inactivated) {
+
+                    if (parent.activeOBJ != null) {
+                        System.out.println("1" + parent.activeOBJ.status);
+                        //  parent.activeOBJ.outline.setVisible(false);
+                        parent.activeOBJ.status = Status.Inactivated;
+                    }
+
+                    // outline.setVisible(true);
+                    status = Status.Activated;
+                    parent.activeOBJ = easyOBJ.this; //從新指定新的物件並畫出外框
+                    parent.repaint();
+                    System.out.println("1" + parent.activeOBJ.status);
+                }else if(status==Status.Activated){
+    //                ImgPage.this.activeOBJ.status
+                    if (lp == null)
+                        lp = new Point();
+                    lp.x = e.getXOnScreen();
+                    lp.y = e.getYOnScreen();
+                    op = easyOBJ.this.getLocation();
+                    
+                    parent.status = Status.MovingOBJ;
+                    status = Status.Moving;
+                    System.out.println("2" + parent.activeOBJ.status);
+                }
                 
             }
             

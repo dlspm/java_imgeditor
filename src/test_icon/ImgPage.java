@@ -19,6 +19,7 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 import java.awt.geom.Ellipse2D;
+import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -27,6 +28,7 @@ import java.net.URL;
 import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import org.w3c.dom.css.Rect;
 
@@ -65,12 +67,48 @@ public class ImgPage extends JPanel{
     
     }
 
+    void Dowimg(String filename){
+        FileOutputStream fos = null;
+        try {
+            System.out.println("變大");
+            File f = new File("img/" + filename);
+            exportOtherShapesImage(f, this);
+//                Dowjpanel.this.exportOtherShapesImage("tt", jp3)
+
+        } finally {
+            
+            try {
+                fos.close();
+            } catch (IOException ex) {
+                Logger.getLogger(ImgPage.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            
+        }
+    }
+    
+    public boolean exportOtherShapesImage(File f, JPanel panel) {
+        Dimension imageSize = panel.getSize();
+        BufferedImage image = new BufferedImage(imageSize.width,
+                imageSize.height, BufferedImage.TYPE_INT_ARGB);
+        Graphics2D g = image.createGraphics();
+        panel.paint(g);
+        g.dispose();
+        try {
+            ImageIO.write(image, "png", f);
+        } catch (IOException e) {
+            e.printStackTrace();
+            return false;
+        }
+        //System.out.println("export Image -->" + f.getAbsoluteFile());
+        return true;
+    }
     
     void addOBJ(Img ip) {
         this.add(ip);
     }
     void Loadimg(String path) throws MalformedURLException{
         System.out.println("Loadimg" + path);
+//        Img on = new Img(path, ImgPage.this);
         Img on = new Img(path);
         this.add(on);
 //        try {
@@ -112,7 +150,7 @@ public class ImgPage extends JPanel{
             cps.setVisible(false);
         }
     }
-    
+
     class MyMouseMotionListener implements MouseMotionListener{
 
         @Override
@@ -205,7 +243,7 @@ public class ImgPage extends JPanel{
         @Override
         public void mouseReleased(MouseEvent e) {
             System.out.println("mouse released");
-            System.out.println(ImgPage.this.activeOBJ.status + "," + ImgPage.this.status);
+//            System.out.println(ImgPage.this.activeOBJ.status + "," + ImgPage.this.status);
             
             Graphics g = ImgPage.this.getGraphics();
             final Graphics2D g2d = (Graphics2D) g;

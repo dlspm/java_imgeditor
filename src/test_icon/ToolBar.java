@@ -131,7 +131,7 @@ import javax.swing.*;
 
 
                     //載入圖片
-                    Img no = new Img("tt.jpg");
+                    Img no = new Img("tt.jpg", ep.activePage);
                     ep.activePage.addOBJ(no);
                     ep.activePage.activeOBJ = no;
 
@@ -155,7 +155,8 @@ import javax.swing.*;
         Btntext.addMouseListener(new MouseAdapter() {
             public void mouseClicked(MouseEvent e) {
                 if(ep.activePage!=null){
-                    Text t = new Text();
+//                    Text t = new Text();
+                    Text_easyOBJ t = new Text_easyOBJ();
                     ep.activePage.add(t);
                     ep.activePage.revalidate();
 

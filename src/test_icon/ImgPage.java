@@ -11,6 +11,7 @@ import java.awt.FlowLayout;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
+import java.awt.MediaTracker;
 import java.awt.Point;
 import java.awt.Rectangle;
 import java.awt.Robot;
@@ -52,6 +53,7 @@ public class ImgPage extends JPanel{
     EasyPainter p;
     public Vector<Line> lines = null;
     
+    Img activeimg = null;
     
     ImgPage(EasyPainter ep) throws MalformedURLException{
         
@@ -75,6 +77,48 @@ public class ImgPage extends JPanel{
 
 //    ImgPage() {
 //    }
+    
+ 
+    
+    public void reduceimg(ImageIcon icon, String s) {
+        
+
+        MediaTracker tracker = new MediaTracker(this);
+        Image chImg = null;
+        ImageIcon ch = null;
+        System.out.println("reduceimg:" + s);
+        if(activeOBJ.easyOBJimg != null){
+            
+//            Image changeimg = reduce(icon,s);
+
+            int width = activeOBJ.easyOBJimg.imc.getIconWidth();// your prefered width
+            int height = activeOBJ.easyOBJimg.imc.getIconHeight();//your prefered height
+
+            ImageIcon image= activeOBJ.easyOBJimg.imc;
+            //方法 1
+//            image.setImage(image.getImage().getScaledInstance(width, height, Image.SCALE_DEFAULT));
+            JLabel jLab1 = new JLabel(image);
+            System.out.println("reduceimg:" + width + "," + height);
+            if (s == "變大") {
+                width *= 1.3;
+                height *= 1.3;
+                
+            }else if(s == "變小"){
+                width *= 0.7;
+                height *= 0.7;
+            }
+            
+            System.out.println("reduceimg:" + width + "," + height);
+            image.setImage(image.getImage().getScaledInstance(width, height, Image.SCALE_DEFAULT));
+
+            activeimg.Jlaimg.setIcon(image);
+            repaint();
+            
+        }
+
+        activeimg.Jlaimg.setIcon(icon);
+        
+    }
     
     void Seledowimg(String path) throws Exception{
         

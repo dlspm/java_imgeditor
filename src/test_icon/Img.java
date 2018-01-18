@@ -55,21 +55,5 @@ public class Img extends easyOBJ{
         
         
     }
-
-    public Image reduceimg(ImageIcon icon ,String s){
-        MediaTracker tracker = new MediaTracker(this);
-        Image chImg = null;
-        if(s == "變大"){
-            chImg = icon.getImage().getScaledInstance(
-                    (int) (icon.getIconWidth() * 1.2), -1, Image.SCALE_SMOOTH);
-        }else if(s == "變小"){
-            
-            chImg = icon.getImage().getScaledInstance(
-                    (int) (icon.getIconWidth() * 0.4), -1, Image.SCALE_SMOOTH);
-        }
-        
-        return chImg;
-    }
-    
     
 }

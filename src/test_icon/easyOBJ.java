@@ -10,6 +10,8 @@ import java.awt.Point;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.net.MalformedURLException;
+import javax.swing.ImageIcon;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 
@@ -25,7 +27,10 @@ public class easyOBJ extends JPanel {
     Status status;
     Point op, lp = null, cp = null;
     Dimension d;
-
+    Img easyOBJimg = null;  //為了要拿到 ImageIcon 物件, Jlabel
+//    JLabel imglabel = null;
+    
+    
     easyOBJ(EasyPainter p){ //Img
         
         parent = p.activePage;

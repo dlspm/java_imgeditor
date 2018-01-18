@@ -283,6 +283,9 @@ import static javax.swing.JFrame.EXIT_ON_CLOSE;
                 
             }else if(e.getSource() == Btnsmall){
                 System.out.println("變小");
+                ep.activePage.reduceimg(ep.activePage.activeOBJ.easyOBJimg.imc,"變小");
+                
+                
             }else if(e.getSource() == Btnall){
                 System.out.println("全部");
                 ep.activePage.Dowimg(filename);                
@@ -365,7 +368,8 @@ import static javax.swing.JFrame.EXIT_ON_CLOSE;
                             ep.activePage.activeOBJ = no;
 
                             ep.activePage.setOutline(no);
-
+                            ep.activePage.activeOBJ.easyOBJimg = no;
+                            ep.activePage.activeimg = no;
                             jtf.setText("");
                         }
                     }else if(status == Status.ToolBarDow){

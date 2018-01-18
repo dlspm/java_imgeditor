@@ -42,7 +42,8 @@ import org.w3c.dom.css.Rect;
  */
 public class ImgPage extends JPanel{
     
-    JLabel tt;
+    
+    
 //    Img newOBJ = null;
     public Status status;
     
@@ -54,6 +55,8 @@ public class ImgPage extends JPanel{
     public Vector<Line> lines = null;
     
     Img activeimg = null;
+    public Color color = Color.BLACK;
+    public int linesize = 1;
     
     ImgPage(EasyPainter ep) throws MalformedURLException{
         
@@ -74,11 +77,6 @@ public class ImgPage extends JPanel{
         this.setSize(600,600);
     
     }
-
-//    ImgPage() {
-//    }
-    
- 
     
     public void reduceimg(ImageIcon icon, String s) {
         
@@ -204,14 +202,14 @@ public class ImgPage extends JPanel{
     protected void paintComponent(Graphics g) {
         System.out.println("ImgPagepaintComponent");
         
-       
-        if(ImgPage.this.status == Status.ToolBarPan){
+            g.setColor(color);
+//        if(p.parametersBar.status == Status.ToolBarPan){
             for (int i = 0; i < this.lines.size(); i++) {
                 Line l = this.lines.elementAt(i);
                 g.drawLine(l.sp.x, l.sp.y, l.ep.x, l.ep.y);
             }
 
-        }
+//        }
         
         if(activeOBJ != null){
             if(activeOBJ.status == Status.Activated){
@@ -251,6 +249,34 @@ public class ImgPage extends JPanel{
     
     }
     
+    public void quadrant(Graphics g) {
+        if (((cp.x - fp.x) > 0) && ((fp.y - cp.y) > 0)) {                     //第1象限
+            g.drawRect(fp.x, cp.y, cp.x - fp.x, fp.y - cp.y);
+        } else if (((fp.x - cp.x) > 0) && ((fp.y - cp.y) > 0)) {                //第2象限
+            g.drawRect(cp.x, cp.y, fp.x - cp.x, fp.y - cp.y);
+        } else if (((fp.x - cp.x) > 0) && ((cp.y - fp.y) > 0)) {                //第3象限
+            g.drawRect(cp.x, fp.y, fp.x - cp.x, cp.y - fp.y);
+        } else if (((cp.x - fp.x) > 0) && ((cp.y - fp.y) > 0)) {                //第4象限
+            g.drawRect(fp.x, fp.y, cp.x - fp.x, cp.y - fp.y);
+        }
+    }
+    
+//    public easyOBJ object(ImgPage p, int x, int y, int w, int h, Color c) {
+//        easyOBJ newOBJ = null;
+//
+//        if (ImgPage.this.p.parametersBar.status == Status.ToolBarRect) {
+//            newOBJ = new Oval(p, x, y, w, h, color);
+//            System.out.println("Rect");
+////        } else if (p.parametersBar.status == Status.ToolBarRect) {
+////            newOBJ = new Oval(p, x, y, w, h, c, num++);
+////            System.out.println("Oval");
+//        } else if (ImgPage.this.p.parametersBar.status == Status.ToolBarOval) {
+//            newOBJ = new Oval(p, x, y, w, h, color);
+//            System.out.println("diamond");
+//        }
+//
+//        return newOBJ;
+//    }
 
     class MyMouseMotionListener implements MouseMotionListener{
 
@@ -264,6 +290,7 @@ public class ImgPage extends JPanel{
                 cp = e.getPoint();
                 Graphics g = ImgPage.this.getGraphics();
                 g.drawLine(lp.x, lp.y, cp.x, cp.y);
+                g.setColor(color);
                 ImgPage.this.lines.add(new Line(lp, cp));
                 lp = cp;
             
@@ -274,7 +301,7 @@ public class ImgPage extends JPanel{
                 
                 Graphics2D g2d = (Graphics2D) ImgPage.this.getGraphics();
                 g2d.setXORMode(Color.red);
-                g2d.setPaint(Color.BLUE);
+                g2d.setPaint(color);
                 if (cp != null) { // 覆蓋過原本
 //                        g2d.setPaint(Page.this.getBackground());
                         g2d.draw(makeOval(fp, cp));
@@ -339,12 +366,12 @@ public class ImgPage extends JPanel{
             
             Graphics g = ImgPage.this.getGraphics();
             final Graphics2D g2d = (Graphics2D) g;
-            g2d.setPaint(Color.BLUE);
+            g2d.setPaint(color);
 
             if (cp != null) {
                 System.out.println(1);
-
-//                    g2d.draw(makeRect(fp, cp));
+//                quadrant(g);
+                    g2d.draw(makeRect(fp, cp));
             }
             if (cp != null) {
                 System.out.println(2);
@@ -356,9 +383,24 @@ public class ImgPage extends JPanel{
                     
                     System.out.println("Released" + fp + "," + cp);
                     
-                    Oval ovalOBJ = new Oval(ImgPage.this, fp, cp);
-                    ImgPage.this.add(ovalOBJ);
-                    activeOBJ = ovalOBJ;
+
+                    
+//                    Rect newOBJ = new ;
+                    Oval newOBJ = null ;
+                    
+                    
+                    if (((cp.x - fp.x) > 0) && ((fp.y - cp.y) > 0)) {                     //第1象限
+                        newOBJ = new Oval(ImgPage.this, fp.x, cp.y, cp.x - fp.x, fp.y - cp.y, color);
+                    } else if (((fp.x - cp.x) > 0) && ((fp.y - cp.y) > 0)) {                //第2象限
+                        newOBJ = new Oval(ImgPage.this, cp.x, cp.y, fp.x-cp.x, fp.y-cp.y, color);
+                    } else if (((fp.x - cp.x) > 0) && ((cp.y - fp.y) > 0)) {                //第3象限
+                        newOBJ = new Oval(ImgPage.this, cp.x, fp.y, fp.x-cp.x, cp.y-fp.y, color);
+                    } else if (((cp.x - fp.x) > 0) && ((cp.y - fp.y) > 0)) {                //第4象限
+                        newOBJ = new Oval(ImgPage.this, fp.x, fp.y, cp.x-fp.x, cp.y-fp.y, color);
+                    }
+
+                    ImgPage.this.add(newOBJ);
+                    activeOBJ = newOBJ;
                     ImgPage.this.setOutline(activeOBJ);
                 }
                 
@@ -374,6 +416,7 @@ public class ImgPage extends JPanel{
         @Override
         public void mouseExited(MouseEvent e) {
         }
+
 
     }
 

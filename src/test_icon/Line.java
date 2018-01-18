@@ -12,10 +12,24 @@ import java.awt.*;
  * @author angus
  */
 public class Line {
-    Point sp, ep;
-    Line(Point s,Point e)
+    Point sp,ep;
+    Color c;
+    int font,w,h;
+    public Line(Point s, Point e, Color a, int f) 
     {
         sp=s;
         ep=e;
+        c=a;
+        font=f;   
+        
     }
+    
+    public Line(Point s, Point e) 
+    {
+        sp=s;
+        ep=e;
+
+        
+    }
+    
 }

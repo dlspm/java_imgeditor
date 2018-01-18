@@ -121,8 +121,8 @@ import javax.swing.*;
         Btntext.addMouseListener(new MouseAdapter() {
             public void mouseClicked(MouseEvent e) {
                 if(ep.activePage!=null){
-//                    Text t = new Text();
-                    Text_easyOBJ t = new Text_easyOBJ();
+                    Text t = new Text("ssss", ep);
+//                    Text_easyOBJ t = new Text_easyOBJ();
                     ep.activePage.add(t);
                     ep.activePage.revalidate();
 
@@ -188,7 +188,7 @@ import javax.swing.*;
                     ep.parametersBar.status = Status.ToolBarDele;
                     ep.parametersBar.setToolBarDele();
                 }
-                System.out.println("success Selected");
+                System.out.println("success Dele");
 
             }
         });

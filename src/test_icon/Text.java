@@ -5,12 +5,17 @@
  */
 package test_icon;
 
+import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.Point;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import javax.swing.*;
 import javax.swing.border.TitledBorder;
+import javax.swing.colorchooser.ColorSelectionModel;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 import javax.swing.text.AttributeSet;
 import javax.swing.text.BadLocationException;
 import javax.swing.text.Document;
@@ -21,24 +26,12 @@ import javax.swing.text.StyleConstants;
  *
  * @author angus
  */
-public class Text extends JTextPane{
+public class Text extends easyOBJ{
 //    JTextArea Jta=null;
     Point op,lp=null,cp=null;
-    JTextArea txaDisplay = new JTextArea(10,10);
+    JLabel Jlatext;
     
-    Text(){
-        
-//        JTextArea txaDisplay = new JTextArea(10,10);
-        SimpleAttributeSet attrSet = new SimpleAttributeSet();
-        StyleConstants.setForeground(attrSet, Color.BLACK);
-        insert("sssssss", attrSet);
-//        JScrollPane scroll = new JScrollPane(txaDisplay);
-//        //透明處理
-//        scroll.setOpaque(false);
-//        scroll.getViewport().setOpaque(false);
-//        txaDisplay.setOpaque(false);
-       
-        setDocs("第一行的文字", Color.red, false, 20);
+    Text(String st, EasyPainter ep){
         
         this.setOpaque(false);
         this.setLocation(10, 10);
@@ -46,6 +39,24 @@ public class Text extends JTextPane{
 
 //        this.setBorder(txaDisplay);
 //        this.setSize(100, 180);
+        
+        Jlatext = new JLabel(st, JLabel.CENTER);
+        Jlatext.setFont(new Font("Serif", Font.BOLD | Font.ITALIC, 48));
+        final JColorChooser colorChooser = new JColorChooser(Jlatext.getBackground());
+
+        ColorSelectionModel model = colorChooser.getSelectionModel();
+        ChangeListener changeListener = new ChangeListener() {
+            public void stateChanged(ChangeEvent changeEvent) {
+                Color newForegroundColor = colorChooser.getColor();
+                Jlatext.setForeground(newForegroundColor);
+            }
+        };
+        model.addChangeListener(changeListener);
+
+        ep.mainWin.cpanel.add(colorChooser, BorderLayout.CENTER);
+//        frame.add(colorChooser, BorderLayout.CENTER);
+    
+
         this.addMouseMotionListener(new MouseAdapter() {
             public void mouseDragged(MouseEvent e) {
                 System.out.println("imgDragged:" + e.getXOnScreen() + "," + e.getYOnScreen());
@@ -95,28 +106,5 @@ public class Text extends JTextPane{
         });
     
     }
-    public void insert(String str, AttributeSet attrSet) {
-        Document doc = this.getDocument();
-        str = "\n" + str;
-        try {
-            doc.insertString(doc.getLength(), str, attrSet);
-        } catch (BadLocationException e) {
-            System.out.println("BadLocationException:   " + e);
-        }
-
-    }
-    public void setDocs(String str, Color col, boolean bold, int fontSize) {
-        SimpleAttributeSet attrSet = new SimpleAttributeSet();
-        StyleConstants.setForeground(attrSet, col);
-        //颜色     
-        if (bold == true) {
-            StyleConstants.setBold(attrSet, true);
-        }//字体类型     
-        StyleConstants.setFontSize(attrSet, fontSize);
-        //字体大小     
-        insert(str, attrSet);
-    }
-    
-    
     
 }

@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package test_icon;
+import java.awt.Color;
 import test_icon.ImgPage;
 
 import java.awt.GridLayout;
@@ -33,8 +34,8 @@ import static javax.swing.JFrame.EXIT_ON_CLOSE;
  */
 //public class ParametersBar extends JPanel implements FocusListener{
   public class ParametersBar extends JPanel{  
-    JTextField Jtfsize, Jtfcolor, Jtfline, Jftimgpath;
-    JButton Btnbig, Btnsmall, Btnall, Btnchoose;
+    JTextField Jtfsize, Jtfline, Jftimgpath;
+    JButton Btnbig, Btnsmall, Btnall, Btnchoose, Btncolor;
     JComboBox Jcboutput ;
     public Status status;
     public EasyPainter ep;
@@ -51,37 +52,30 @@ import static javax.swing.JFrame.EXIT_ON_CLOSE;
         status = Status.ToolBarNewPage; //因為一定是從 NewPage 開始
         
         Jtfsize = new JTextField(15);
-        Jtfcolor = new JTextField(15);
         Jtfline = new JTextField(15);
         Jftimgpath = new JTextField(15);
         
         String info1 = "輸入大小";
-        String info2 = "輸入顏色";
         String info3 = "輸入粗細";
         String info4 = "輸入圖片名稱";
         
         Jtfsize.setText(info1);
-        Jtfcolor.setText(info2);
         Jtfline.setText(info3);
         Jftimgpath.setText(info4);
         
         this.add(Jtfsize);
-        this.add(Jtfcolor);
         this.add(Jtfline);
         this.add(Jftimgpath);
         
         Jtfsize.addFocusListener(new MyFocusListener(info1, Jtfsize));//添加焦点事件反映  
-        Jtfcolor.addFocusListener(new MyFocusListener(info2, Jtfcolor));
         Jtfline.addFocusListener(new MyFocusListener(info3, Jtfline));
         Jftimgpath.addFocusListener(new MyFocusListener(info4, Jftimgpath));
         
         Jtfsize.addKeyListener(new MyKeyListener(Jtfsize));
-        Jtfcolor.addKeyListener(new MyKeyListener(Jtfcolor));
         Jtfline.addKeyListener(new MyKeyListener(Jtfline));
         Jftimgpath.addKeyListener(new MyKeyListener(Jftimgpath));
         
         Jtfsize.setVisible(false);
-        Jtfcolor.setVisible(false);
         Jtfline.setVisible(false);
         Jftimgpath.setVisible(false);
         
@@ -91,6 +85,8 @@ import static javax.swing.JFrame.EXIT_ON_CLOSE;
 //        Jcboutput.setVisible(false);
 //        this.add(Jcboutput);
         
+        Btncolor = new JButton("選擇顏色");
+        Btncolor.setVisible(false);
         Btnbig = new JButton("變大");
         Btnbig.setVisible(false);
         Btnsmall = new JButton("變小");
@@ -101,9 +97,12 @@ import static javax.swing.JFrame.EXIT_ON_CLOSE;
         Btnchoose.setVisible(false);
         
         
+        this.add(Btncolor);
+        Btncolor.addMouseListener(new MyMouseListener());
         
         this.add(Btnbig);
         Btnbig.addMouseListener(new MyMouseListener());
+        
         this.add(Btnsmall);
         Btnsmall.addMouseListener(new MyMouseListener());
         
@@ -146,7 +145,7 @@ import static javax.swing.JFrame.EXIT_ON_CLOSE;
         Btnall.setVisible(false);
         Btnchoose.setVisible(false);
         Jtfline.setVisible(true);
-        Jtfcolor.setVisible(true);
+        Btncolor.setVisible(true);
         Jtfsize.setVisible(true);
         
         this.revalidate();
@@ -159,7 +158,7 @@ import static javax.swing.JFrame.EXIT_ON_CLOSE;
         Btnall.setVisible(false);
         Btnchoose.setVisible(false);
         Jtfline.setVisible(false);
-        Jtfcolor.setVisible(false);
+        Btncolor.setVisible(false);
         Jtfsize.setVisible(false);
         
         
@@ -173,7 +172,7 @@ import static javax.swing.JFrame.EXIT_ON_CLOSE;
         Btnall.setVisible(false);
         Btnchoose.setVisible(false);
         Jtfline.setVisible(true);
-        Jtfcolor.setVisible(true);
+        Btncolor.setVisible(true);
         Jtfsize.setVisible(true);
         
         this.revalidate();
@@ -186,7 +185,7 @@ import static javax.swing.JFrame.EXIT_ON_CLOSE;
         Btnall.setVisible(false);
         Btnchoose.setVisible(false);
         Jtfline.setVisible(false);
-        Jtfcolor.setVisible(false);
+        Btncolor.setVisible(false);
         Jtfsize.setVisible(false);
         
         this.revalidate();
@@ -199,7 +198,7 @@ import static javax.swing.JFrame.EXIT_ON_CLOSE;
         Btnall.setVisible(false);
         Btnchoose.setVisible(false);
         Jtfline.setVisible(false);
-        Jtfcolor.setVisible(true);
+        Btncolor.setVisible(true);
         Jtfsize.setVisible(true);
         
         this.revalidate();
@@ -212,7 +211,7 @@ import static javax.swing.JFrame.EXIT_ON_CLOSE;
         Btnall.setVisible(true);
         Btnchoose.setVisible(true);
         Jtfline.setVisible(false);
-        Jtfcolor.setVisible(false);
+        Btncolor.setVisible(false);
         Jtfsize.setVisible(false);
         
         this.revalidate();
@@ -225,7 +224,7 @@ import static javax.swing.JFrame.EXIT_ON_CLOSE;
         Btnall.setVisible(false);
         Btnchoose.setVisible(false);
         Jtfline.setVisible(false);
-        Jtfcolor.setVisible(false);
+        Btncolor.setVisible(false);
         Jtfsize.setVisible(false);
         
         this.revalidate();
@@ -238,7 +237,7 @@ import static javax.swing.JFrame.EXIT_ON_CLOSE;
         Btnall.setVisible(false);
         Btnchoose.setVisible(false);
         Jtfline.setVisible(false);
-        Jtfcolor.setVisible(false);
+        Btncolor.setVisible(false);
         Jtfsize.setVisible(false);
         
         this.revalidate();
@@ -250,7 +249,7 @@ import static javax.swing.JFrame.EXIT_ON_CLOSE;
         Btnall.setVisible(false);
         Btnchoose.setVisible(false);
         Jtfline.setVisible(false);
-        Jtfcolor.setVisible(false);
+        Btncolor.setVisible(false);
         Jtfsize.setVisible(false);
 
         this.revalidate();
@@ -300,6 +299,10 @@ import static javax.swing.JFrame.EXIT_ON_CLOSE;
                 } catch (Exception ex) {
                     Logger.getLogger(ParametersBar.class.getName()).log(Level.SEVERE, null, ex);
                 }
+            }else if(e.getSource() == Btncolor){
+                System.out.println("顏色");
+                ep.activePage.color = JColorChooser.showDialog(ep.activePage, "調色板",Color.BLACK);
+                System.out.println(ep.activePage.color);
             }
         }
 
@@ -346,8 +349,6 @@ import static javax.swing.JFrame.EXIT_ON_CLOSE;
                 //要去啟動 更改 ImgPage ToolBar 
                 if(e.getSource() == Jtfsize){
                     
-                }else if(e.getSource() == Jtfcolor){
-                    
                 }else if(e.getSource() == Jtfline){
                     
                 }else if(e.getSource() == Jftimgpath){
@@ -381,6 +382,10 @@ import static javax.swing.JFrame.EXIT_ON_CLOSE;
 //                        p.activePage.Dowimg(temp);
                     }
 
+                }else if(e.getSource() == Jtfline){
+                    System.out.println(temp);
+                    ep.activePage.linesize =  Integer.parseInt(temp);
+                    
                 }
                 
             }

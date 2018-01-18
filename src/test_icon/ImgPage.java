@@ -122,7 +122,7 @@ public class ImgPage extends JPanel{
             e.printStackTrace();
             return false;
         }
-        //System.out.println("export Image -->" + f.getAbsoluteFile());
+        
         return true;
     }
     
@@ -161,6 +161,7 @@ public class ImgPage extends JPanel{
     protected void paintComponent(Graphics g) {
         System.out.println("ImgPagepaintComponent");
         
+       
         if(ImgPage.this.status == Status.ToolBarPan){
             for (int i = 0; i < this.lines.size(); i++) {
                 Line l = this.lines.elementAt(i);
@@ -169,19 +170,28 @@ public class ImgPage extends JPanel{
 
         }
         
-        if(this.activeOBJ != null){
-//            System.out.println("有物件拉 幹！");
-////            super.paintComponent(g);
-//            Point p = activeOBJ.getLocation();
-//            Dimension d = activeOBJ.getSize();
-//            System.out.println("paintComponent:" + p.x + "," + p.y + "," + d.width + "," + d.height);
-//            g.drawRect(p.x - 5, p.y - 5, d.width + 10, d.height + 10);
-//            cps.setLocations();
-//            cps.setVisible(true);
-//            picture(activeOBJ);
-        }else {
-//            cps.setVisible(false);
+        if(activeOBJ != null){
+            if(activeOBJ.status == Status.Activated){
+                
+                
+                
+                // super.paintComponent(g);
+                //g.setColor(Color.red);
+                Point p = activeOBJ.getLocation();
+                Dimension d = activeOBJ.getSize();
+                System.out.println("!paintComponent:" + p.x + "," + p.y + "," + d.width + "," + d.height);
+                g.drawRect(p.x - 10, p.y - 10, d.width + 20, d.height + 20);
+                 
+//        picture(eo);
+                
+                
+            }
+        
+        
         }
+        
+        
+        
     }
     
     public void picture(easyOBJ eo){
@@ -209,29 +219,31 @@ public class ImgPage extends JPanel{
     public void setOutline(easyOBJ eo){
         System.out.println("setOutline");
         
-        Graphics g = ImgPage.this.getGraphics();
-        super.paintComponent(g);
+        Graphics g = this.getGraphics();
+       // super.paintComponent(g);
+        //g.setColor(Color.red);
         Point p = eo.getLocation();
         Dimension d = eo.getSize();
         System.out.println("paintComponent:" + p.x + "," + p.y + "," + d.width + "," + d.height);
-        g.drawRect(p.x - 5, p.y - 5, d.width + 10, d.height + 10);
-//        picture(eo);
+        g.drawRect(p.x-10, p.y-10, d.width+20, d.height+20);
+        this.repaint();
+        picture(eo);
         cps.setLocations();
         cps.setVisible(true);
-        repaint();
+        //repaint();
     }
     
-    public void onsetOutline(easyOBJ eo){
+    public void unsetOutline(easyOBJ eo){
         System.out.println("onsetOutline");
         
         Graphics g = ImgPage.this.getGraphics();
-        g.setXORMode(Color.red);
+        //g.setXORMode(Color.red);
 //        g.setPaint(Color.BLUE);
 //            super.paintComponent(g);
         Point p = eo.getLocation();
         Dimension d = eo.getSize();
         System.out.println("paintComponent:" + p.x + "," + p.y + "," + d.width + "," + d.height);
-        g.drawRect(p.x - 5, p.y - 5, d.width + 10, d.height + 10);
+        g.drawRect(p.x-10, p.y-10, d.width+20, d.height+20);
         cps.setVisible(false);
     
     }
@@ -321,8 +333,9 @@ public class ImgPage extends JPanel{
                 if (ImgPage.this.activeOBJ.status == Status.Activated) {
                     //Page.this.activeOBJ.outline.setVisible(false);
                     ImgPage.this.activeOBJ.status = Status.Inactivated;
+                    unsetOutline(activeOBJ);
                     ImgPage.this.activeOBJ = null;
-                    ImgPage.this.repaint();
+//                    ImgPage.this.repaint();
 //                    ImgPage.this.revalidate();
                 }
             }
@@ -352,7 +365,7 @@ public class ImgPage extends JPanel{
 
 //                        Page.this.add(newLine);
 //                        Page.this.activeOBJ = newLine;
-                    ImgPage.this.repaint();
+//                    ImgPage.this.repaint();
                 }
                 if (ImgPage.this.status == Status.ToolBarRect) {
                     cp = e.getPoint();
@@ -372,7 +385,7 @@ public class ImgPage extends JPanel{
                     Oval newOBJ = new Oval(ImgPage.this, fp, cp);
                     ImgPage.this.add(newOBJ);
                     ImgPage.this.activeOBJ = newOBJ;
-                    ImgPage.this.repaint();
+//                    ImgPage.this.repaint();
 
 //                        cp = e.getPoint();
 //                        g2d.draw(makeOval(fp, cp));
@@ -380,7 +393,7 @@ public class ImgPage extends JPanel{
                 }
             }
 
-            repaint();
+//            repaint();
         }
 
         @Override

@@ -24,7 +24,7 @@ public class MainWindow extends JFrame{  //用extends 去繼承 Frame
     MainWindow(EasyPainter ep)
     {
         
-        
+        this.setContentPane(cpanel);
         this.pack(); // 用來將視窗中的各個元件，自動依版面配置作適當的排列。
         this.setLocation(100, 20);
         this.setSize(800, 600);

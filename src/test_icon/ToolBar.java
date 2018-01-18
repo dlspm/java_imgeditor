@@ -125,6 +125,7 @@ import javax.swing.*;
 
                 //載入圖片
                 if (ep.activePage.activeOBJ != null){
+                    ep.activePage.activeOBJ.status = Status.Inactivated;
                     ep.activePage.activeOBJ =null;
                 }
                 
@@ -136,10 +137,11 @@ import javax.swing.*;
                 }
                 ep.activePage.addOBJ(no);
                 ep.activePage.activeOBJ = no;
+                
                 ep.activePage.setOutline(no);
                 
                 
-                ep.activePage.repaint();
+//                ep.activePage.repaint();
                 //                    ep.activePage.add(no);
                 //  ep.activePage.revalidate();
                 //                    if (ep.activePage != null) {
@@ -218,7 +220,7 @@ import javax.swing.*;
                     if (ep.activePage.activeOBJ != null) {
                         ep.activePage.remove(ep.activePage.activeOBJ);
                         ep.activePage.activeOBJ = null;
-                        ep.activePage.repaint();
+//                        ep.activePage.repaint();
                     }
                     
                 }

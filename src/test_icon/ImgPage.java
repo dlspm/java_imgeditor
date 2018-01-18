@@ -301,7 +301,7 @@ public class ImgPage extends JPanel{
                 
                 Graphics2D g2d = (Graphics2D) ImgPage.this.getGraphics();
                 g2d.setXORMode(Color.red);
-                g2d.setPaint(color);
+                g2d.setPaint(Color.BLUE);
                 if (cp != null) { // 覆蓋過原本
 //                        g2d.setPaint(Page.this.getBackground());
                         g2d.draw(makeOval(fp, cp));
@@ -366,12 +366,13 @@ public class ImgPage extends JPanel{
             
             Graphics g = ImgPage.this.getGraphics();
             final Graphics2D g2d = (Graphics2D) g;
-            g2d.setPaint(color);
+//            g2d.setPaint(Color.BLUE);
+            g.setXORMode(Color.red);
 
             if (cp != null) {
                 System.out.println(1);
-//                quadrant(g);
-                    g2d.draw(makeRect(fp, cp));
+                quadrant(g);
+//                    g2d.draw(makeRect(fp, cp));
             }
             if (cp != null) {
                 System.out.println(2);

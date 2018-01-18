@@ -18,6 +18,7 @@ public class Oval extends easyOBJ {
 //    public Oval(Page p, Point sp, int w, int h) {
     public Oval(ImgPage p, int x, int y, int w, int h, Color c) {
         super(p, x, y, w, h, c);
+        color = c;
     }
         
     protected void paintComponent(Graphics g)
@@ -26,7 +27,7 @@ public class Oval extends easyOBJ {
         int w, h;
         w = (this.getSize()).width;
         h = (this.getSize()).height;
-        g.setColor(Oval.this.color);
+        g.setColor(color);
         ((Graphics2D) g).setStroke(new BasicStroke(5));
         g.drawOval(0, 0, w - 1, h - 1);
         System.out.println("Opaint");

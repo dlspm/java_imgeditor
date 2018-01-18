@@ -29,6 +29,7 @@ public class Oval extends easyOBJ {
     
     protected void paintComponent(Graphics g)
     {
+        System.out.println("OvalpaintComponent");
         
         Graphics2D g2d = (Graphics2D)g;
         g2d.setPaint(Color.BLUE);

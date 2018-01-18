@@ -43,7 +43,7 @@ class EasyPainter {
         mainWin = new MainWindow(this);
         megBar = new MessageBar(this);
         toolBar = new ToolBar(this);
-//        imgPage = new ImgPage(this);
+        activePage = new ImgPage(this);
         parametersBar = new ParametersBar(this);
         
         pages = new Vector<ImgPage>();

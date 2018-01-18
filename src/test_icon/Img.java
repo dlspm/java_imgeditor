@@ -28,46 +28,52 @@ public class Img extends easyOBJ{
     
     JLabel Jlaimg;
     Point op,lp=null,cp=null;
-//    Dimension d;
+    Dimension d;
     
     Status status;
     ImageIcon imc;
-    Img(String su, ImgPage p) throws MalformedURLException{
-    
+    Img(String su, EasyPainter ep) throws MalformedURLException{
+        super(ep);
         status = Status.Activated;
         Point x , y;
 //        URL url = new URL(su);
         imc = new ImageIcon(su);
         
-        System.out.println("add Img OK");
+        System.out.println("add Img OK:" + imc.getIconWidth() + "," + imc.getIconHeight());
         
-        Jlaimg = new JLabel(imc);
+        Jlaimg = new JLabel();
         Jlaimg.setIcon(imc);
-        Jlaimg.setBounds(0, 0, imc.getIconWidth(), imc.getIconHeight());
+        Jlaimg.setBounds(20, 20, imc.getIconWidth(), imc.getIconHeight());
+        Jlaimg.setSize(imc.getIconWidth(), imc.getIconHeight());
         this.add(Jlaimg);
-        this.setSize( imc.getIconWidth(), imc.getIconHeight());
-        x= this.getLocation();
-        this.setLocation(x);
+        
+
+        System.out.println(Jlaimg.getSize() + "," + Jlaimg.getLocation());
+        this.setLocation(Jlaimg.getLocation());
+        this.setSize(imc.getIconWidth(), imc.getIconHeight());
+//        ep.activePage.picture(this);
+        ep.activePage.setOutline(Img.this);
+//        p.repaint();
         
     }
     
-    Img(String su) throws MalformedURLException{
-    
-        status = Status.Activated;
-        Point x , y;
-//        URL url = new URL(su);
-        ImageIcon imc = new ImageIcon(su);
-        
-        System.out.println("add Img OK");
-        
-        Jlaimg = new JLabel(imc);
-        Jlaimg.setIcon(imc);
-        Jlaimg.setBounds(0, 0, imc.getIconWidth(), imc.getIconHeight());
-        this.add(Jlaimg);
-        this.setSize( imc.getIconWidth(), imc.getIconHeight());
-        x= this.getLocation();
-        this.setLocation(x);
-    }
+//    Img(String su, EasyPainter ep) throws MalformedURLException{
+//    
+//        status = Status.Activated;
+//        Point x , y;
+////        URL url = new URL(su);
+//        ImageIcon imc = new ImageIcon(su);
+//        
+//        System.out.println("add Img OK");
+//        
+//        Jlaimg = new JLabel(imc);
+//        Jlaimg.setIcon(imc);
+//        Jlaimg.setBounds(0, 0, imc.getIconWidth(), imc.getIconHeight());
+//        this.add(Jlaimg);
+//        this.setSize( imc.getIconWidth(), imc.getIconHeight());
+//        x= this.getLocation();
+//        this.setLocation(x);
+//    }
     
     public Image reduceimg(ImageIcon icon ,String s){
         MediaTracker tracker = new MediaTracker(this);

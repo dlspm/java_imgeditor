@@ -62,31 +62,25 @@ import javax.swing.*;
         
         Btnnewpage.addMouseListener(new MouseAdapter() {
             public void mouseClicked(MouseEvent e) {
+                System.out.println("mouseClicked newPage");
+                if (ep.activePage != null) {
+                    ep.mainWin.remove(ep.activePage);
+                }
                 try {
-                    System.out.println("mouseClicked newPage");
-                    if (ep.activePage != null) {
-                        ep.mainWin.remove(ep.activePage);
-                    }
-                    
-                    ep.activePage = new ImgPage();
-                    ep.pages.add(ep.activePage);
-                    
-                    ep.mainWin.setImgPage(ep.activePage);
-                    
-                    ep.curPages = ++ep.numPages;
-                    ep.megBar.updateInfo(ep.curPages, ep.numPages);
-                    //ep.mainWin.cpanel.revalidate();
-                    
-                    
-                    if(ep.activePage!=null){
-                        ep.parametersBar.status = Status.ToolBarNewPage;
-                        ep.parametersBar.setToolBarNewPage();
-                    }
-                    System.out.println("success newPage");
-                    
+                    ep.activePage = new ImgPage(ep);
                 } catch (MalformedURLException ex) {
                     Logger.getLogger(ToolBar.class.getName()).log(Level.SEVERE, null, ex);
                 }
+                ep.pages.add(ep.activePage);
+                ep.mainWin.setImgPage(ep.activePage);
+                ep.curPages = ++ep.numPages;
+                ep.megBar.updateInfo(ep.curPages, ep.numPages);
+                //ep.mainWin.cpanel.revalidate();
+                if(ep.activePage!=null){
+                    ep.parametersBar.status = Status.ToolBarNewPage;
+                    ep.parametersBar.setToolBarNewPage();
+                }
+                System.out.println("success newPage");
                 
                 
             }
@@ -136,10 +130,12 @@ import javax.swing.*;
                     }
                     
                     
-                    Img no = new Img("tt.jpg", ep.activePage);
-//                    ep.activePage.setOutline(no);
+                    Img no = new Img("tt.jpg", ep);
+                    
                     ep.activePage.addOBJ(no);
                     ep.activePage.activeOBJ = no;
+                    
+//                    ep.activePage.setOutline(no);
                     ep.activePage.repaint();
 
                     //                    ep.activePage.add(no);

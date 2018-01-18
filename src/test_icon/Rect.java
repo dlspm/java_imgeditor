@@ -32,7 +32,7 @@ public class Rect extends easyOBJ{
     }
     
     protected void paintComponent(Graphics g) {
-
+        System.out.println("RectpaintComponent");
         Graphics2D g2d = (Graphics2D) g;
         g2d.setPaint(Color.BLUE);
         System.out.println("Oval2" + parent.fp + "," + parent.cp);

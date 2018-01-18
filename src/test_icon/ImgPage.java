@@ -21,6 +21,7 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 import java.awt.geom.Ellipse2D;
+import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.FileOutputStream;
@@ -48,11 +49,13 @@ public class ImgPage extends JPanel{
     ControlPoints cps;
     Point lp, cp, fp;
     
-    
+    EasyPainter p;
     public Vector<Line> lines = null;
     
     
-    ImgPage() throws MalformedURLException{
+    ImgPage(EasyPainter ep) throws MalformedURLException{
+        
+        p = ep;
         status = Status.Selection;
         
         cps = new ControlPoints(ImgPage.this);
@@ -69,6 +72,9 @@ public class ImgPage extends JPanel{
         this.setSize(600,600);
     
     }
+
+//    ImgPage() {
+//    }
     
     void Seledowimg(String path) throws Exception{
         
@@ -125,8 +131,9 @@ public class ImgPage extends JPanel{
     }
     void Loadimg(String path) throws MalformedURLException{
         System.out.println("Loadimg" + path);
-//        Img on = new Img(path, ImgPage.this);
-        Img on = new Img(path);
+        Img on = new Img(path, p);
+//        Img no = new Img(path, p.activePage, p);
+//        Img on = new Img(path);
         this.add(on);
 //        try {
 //            Img on = new Img(path);
@@ -152,7 +159,7 @@ public class ImgPage extends JPanel{
     }
     
     protected void paintComponent(Graphics g) {
-        System.out.println("paintComponent");
+        System.out.println("ImgPagepaintComponent");
         
         if(ImgPage.this.status == Status.ToolBarPan){
             for (int i = 0; i < this.lines.size(); i++) {
@@ -163,47 +170,72 @@ public class ImgPage extends JPanel{
         }
         
         if(this.activeOBJ != null){
-            System.out.println("有物件拉 幹！");
-//            super.paintComponent(g);
-            Point p = activeOBJ.getLocation();
-            Dimension d = activeOBJ.getSize();
-            System.out.println("paintComponent:" + p.x + "," + p.y + "," + d.width + "," + d.height);
-            g.drawRect(p.x - 5, p.y - 5, d.width + 10, d.height + 10);
-            cps.setLocations();
-            cps.setVisible(true);
+//            System.out.println("有物件拉 幹！");
+////            super.paintComponent(g);
+//            Point p = activeOBJ.getLocation();
+//            Dimension d = activeOBJ.getSize();
+//            System.out.println("paintComponent:" + p.x + "," + p.y + "," + d.width + "," + d.height);
+//            g.drawRect(p.x - 5, p.y - 5, d.width + 10, d.height + 10);
+//            cps.setLocations();
+//            cps.setVisible(true);
+//            picture(activeOBJ);
         }else {
-            cps.setVisible(false);
+//            cps.setVisible(false);
         }
     }
     
-//    public void setOutline(easyOBJ eo){
-//        System.out.println("setOutline");
-//        
-//        Graphics g = ImgPage.this.getGraphics();
-////            super.paintComponent(g);
-//        Point p = eo.getLocation();
-//        Dimension d = eo.getSize();
-//        System.out.println("paintComponent:" + p.x + "," + p.y + "," + d.width + "," + d.height);
-//        g.drawRect(p.x - 5, p.y - 5, d.width + 10, d.height + 10);
-//        cps.setLocations();
-//        cps.setVisible(true);
-//    }
-//    
-//    public void onsetOutline(easyOBJ eo){
-//        System.out.println("onsetOutline");
-//        
-//        Graphics g = ImgPage.this.getGraphics();
-//        g.setXORMode(Color.red);
-////        g.setPaint(Color.BLUE);
-////            super.paintComponent(g);
-//        Point p = eo.getLocation();
-//        Dimension d = eo.getSize();
-//        System.out.println("paintComponent:" + p.x + "," + p.y + "," + d.width + "," + d.height);
-//        g.drawRect(p.x - 5, p.y - 5, d.width + 10, d.height + 10);
-//        cps.setVisible(false);
-//    
-//    }
-//    
+    public void picture(easyOBJ eo){
+        System.out.println("picture");
+        Graphics g = ImgPage.this.getGraphics();
+        Point p = eo.getLocation();
+        Dimension d = eo.getSize();
+        
+        System.out.println("paintComponent:" + p.x + "," + p.y + "," + d.width + "," + d.height);
+        
+        Graphics2D g2=(Graphics2D)g;
+//        double leftX=100;
+//        double topY=100;
+//        double width=200;
+//        double height=150;
+        Rectangle2D rect = new Rectangle2D.Double(p.x, p.y, d.width, d.height);
+        g2.draw(rect);
+        
+        cps.setVisible(true);
+//        repaint();
+
+        
+    }
+    
+    public void setOutline(easyOBJ eo){
+        System.out.println("setOutline");
+        
+        Graphics g = ImgPage.this.getGraphics();
+        super.paintComponent(g);
+        Point p = eo.getLocation();
+        Dimension d = eo.getSize();
+        System.out.println("paintComponent:" + p.x + "," + p.y + "," + d.width + "," + d.height);
+        g.drawRect(p.x - 5, p.y - 5, d.width + 10, d.height + 10);
+//        picture(eo);
+        cps.setLocations();
+        cps.setVisible(true);
+        repaint();
+    }
+    
+    public void onsetOutline(easyOBJ eo){
+        System.out.println("onsetOutline");
+        
+        Graphics g = ImgPage.this.getGraphics();
+        g.setXORMode(Color.red);
+//        g.setPaint(Color.BLUE);
+//            super.paintComponent(g);
+        Point p = eo.getLocation();
+        Dimension d = eo.getSize();
+        System.out.println("paintComponent:" + p.x + "," + p.y + "," + d.width + "," + d.height);
+        g.drawRect(p.x - 5, p.y - 5, d.width + 10, d.height + 10);
+        cps.setVisible(false);
+    
+    }
+    
 
     class MyMouseMotionListener implements MouseMotionListener{
 

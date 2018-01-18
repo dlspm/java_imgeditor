@@ -157,7 +157,7 @@ public class ControlPoints {
         
         Point p=parent.activeOBJ.getLocation();
         Dimension d=parent.activeOBJ.getSize();
-        
+        System.out.println("Control:getLocation" + p.x + "," + p.y + "getSize" + d.width + "," + d.height );
         NW.setLocation(p.x-9, p.y-9);
         N.setLocation( p.x+d.width/2-4, p.y-9);
         NE.setLocation(p.x+d.width+1, p.y-9);

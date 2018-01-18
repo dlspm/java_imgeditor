@@ -190,7 +190,7 @@ public class ImgPage extends JPanel{
         Point p = eo.getLocation();
         Dimension d = eo.getSize();
         
-        System.out.println("paintComponent:" + p.x + "," + p.y + "," + d.width + "," + d.height);
+        System.out.println("picture:" + p.x + "," + p.y + "," + d.width + "," + d.height);
         
         Graphics2D g2=(Graphics2D)g;
 //        double leftX=100;

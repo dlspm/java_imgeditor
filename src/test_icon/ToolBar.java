@@ -127,6 +127,7 @@ import javax.swing.*;
                 if (ep.activePage.activeOBJ != null){
                     ep.activePage.activeOBJ =null;
                 }
+                
                 Img no = null;
                 try {
                     no = new Img("tt.jpg", ep);
@@ -135,7 +136,9 @@ import javax.swing.*;
                 }
                 ep.activePage.addOBJ(no);
                 ep.activePage.activeOBJ = no;
-                //                    ep.activePage.setOutline(no);
+                ep.activePage.setOutline(no);
+                
+                
                 ep.activePage.repaint();
                 //                    ep.activePage.add(no);
                 //  ep.activePage.revalidate();

@@ -26,12 +26,12 @@ public class easyOBJ extends JPanel {
     Point op, lp = null, cp = null;
     Dimension d;
 
-    easyOBJ(EasyPainter p){ //沒有參數時只會有物件移動的功能
+    easyOBJ(EasyPainter p){ //Img
         
         parent = p.activePage;
         status = Status.Activated;
         
-        this.addMouseMotionListener(new MouseAdapter(){
+        this.addMouseMotionListener(new MouseAdapter(){ 
             public void mouseDragged(MouseEvent e){
                 System.out.println("imgDragged:"+e.getXOnScreen() + "," + e.getYOnScreen());
                 
@@ -55,14 +55,14 @@ public class easyOBJ extends JPanel {
         
         this.addMouseListener(new MouseAdapter() {
             public void mousePressed(MouseEvent e) {
-                System.out.println("imgPressed:" + status);
+                System.out.println("imgPressed_ep:" + status);
                 if (status == Status.Inactivated) {
 
                     if (parent.activeOBJ != null) {
                         System.out.println("1" + parent.activeOBJ.status);
                         //  parent.activeOBJ.outline.setVisible(false);
                         
-                        parent.onsetOutline(easyOBJ.this);
+//                        parent.onsetOutline(easyOBJ.this);
                         parent.activeOBJ.status = Status.Inactivated;
                         parent.activeOBJ = null;
                     }
@@ -75,6 +75,8 @@ public class easyOBJ extends JPanel {
                     System.out.println("1" + parent.activeOBJ.status);
                 }else if(status==Status.Activated){
     //                ImgPage.this.activeOBJ.status
+                    System.out.println("2" + parent.status + "," + status);
+                    parent.onsetOutline(easyOBJ.this);
                     if (lp == null)
                         lp = new Point();
                     lp.x = e.getXOnScreen();
@@ -83,7 +85,7 @@ public class easyOBJ extends JPanel {
                     
                     parent.status = Status.MovingOBJ;
                     status = Status.Moving;
-                    System.out.println("2" + parent.activeOBJ.status);
+                    System.out.println("2" + parent.status + "," + status);
                 }
                 
             }
@@ -91,6 +93,13 @@ public class easyOBJ extends JPanel {
             public void mouseReleased(MouseEvent e){
                 System.out.println("mouse released in easyOBJ");
                 
+                parent.status = Status.Selection;
+                status = Status.Activated;
+                
+                
+                System.out.println("3" + parent.status + "," + status);
+                
+                parent.setOutline(easyOBJ.this);
             }
             
             public void mouseEntered(MouseEvent e){
@@ -133,7 +142,7 @@ public class easyOBJ extends JPanel {
 
         this.addMouseListener(new MouseAdapter() {
             public void mousePressed(MouseEvent e) {
-                System.out.println("imgPressed:" + status);
+                System.out.println("imgPressedXXX:" + status);
                 if (status == Status.Inactivated) {
 
                     if (parent.activeOBJ != null) {

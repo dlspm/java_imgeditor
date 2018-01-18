@@ -45,9 +45,9 @@ import static javax.swing.JFrame.EXIT_ON_CLOSE;
     JTextField jtf1, jtf2, jtf3;
 //    ImgPage ip = new ImgPage();
     
-    ParametersBar(EasyPainter ep){
+    ParametersBar(EasyPainter p){
         this.setLayout(new GridLayout(9, 1));
-        ep=ep;
+        ep=p;
         status = Status.ToolBarNewPage; //因為一定是從 NewPage 開始
         
         Jtfsize = new JTextField(15);
@@ -104,49 +104,13 @@ import static javax.swing.JFrame.EXIT_ON_CLOSE;
         
         this.add(Btnbig);
         Btnbig.addMouseListener(new MyMouseListener());
-//        Btnbig.addMouseListener(new MouseAdapter()
-//        {
-//            public void mouseClicked(MouseEvent e)
-//            {
-//                System.out.println("變大");
-//            }
-//        
-//        });
-        
         this.add(Btnsmall);
         Btnsmall.addMouseListener(new MyMouseListener());
-//        Btnsmall.addMouseMotionListener(l);
-//        Btnsmall.addMouseListener(new MouseAdapter()
-//        {
-//            public void mouseClicked(MouseEvent e)
-//            {
-//                System.out.println("變小");
-//            }
-//        
-//        });
         
         this.add(Btnall);
         Btnall.addMouseListener(new MyMouseListener());
-//        Btnall.addMouseListener(new MouseAdapter()
-//        {
-//            public void mouseClicked(MouseEvent e)
-//            {
-//                System.out.println("全部");
-//            }
-//        
-//        });
-        
         this.add(Btnchoose);
         Btnchoose.addMouseListener(new MyMouseListener());
-//        Btnchoose.addMouseListener(new MouseAdapter()
-//        {
-//            public void mouseClicked(MouseEvent e)
-//            {
-//                System.out.println("選取");
-//            }
-//        
-//        });
-        
         
 
         //test：
@@ -255,14 +219,14 @@ import static javax.swing.JFrame.EXIT_ON_CLOSE;
     }
     
     public void setToolBarIcon(){
-        Jftimgpath.setVisible(false);
+        Jftimgpath.setVisible(true);
         Btnbig.setVisible(false);
         Btnsmall.setVisible(false);
         Btnall.setVisible(false);
         Btnchoose.setVisible(false);
         Jtfline.setVisible(false);
         Jtfcolor.setVisible(false);
-        Jtfsize.setVisible(true);
+        Jtfsize.setVisible(false);
         
         this.revalidate();
     }
@@ -279,7 +243,18 @@ import static javax.swing.JFrame.EXIT_ON_CLOSE;
         
         this.revalidate();
     }
+    public void setToolBarDele(){
+        Jftimgpath.setVisible(false);
+        Btnbig.setVisible(false);
+        Btnsmall.setVisible(false);
+        Btnall.setVisible(false);
+        Btnchoose.setVisible(false);
+        Jtfline.setVisible(false);
+        Jtfcolor.setVisible(false);
+        Jtfsize.setVisible(false);
 
+        this.revalidate();
+    }
     
     class MyMouseMotionListener implements MouseMotionListener{
 
@@ -376,16 +351,23 @@ import static javax.swing.JFrame.EXIT_ON_CLOSE;
                     
                     
                     if (status == Status.ToolBarImg){
-                        System.out.println("！！！！！！！！" + "Jftimgpath" + temp);
-                        //
-                        Img no = null;
-                        try {
-                            no = new Img(temp, ep);
-                        } catch (MalformedURLException ex) {
-                            Logger.getLogger(ParametersBar.class.getName()).log(Level.SEVERE, null, ex);
+                        
+                        if(temp != ""){
+                            System.out.println("！！！！！！！！" + "Jftimgpath" + temp);
+                            //
+                            Img no = null;
+                            try {
+                                no = new Img(temp, ep);
+                            } catch (MalformedURLException ex) {
+                                Logger.getLogger(ToolBar.class.getName()).log(Level.SEVERE, null, ex);
+                            }
+                            ep.activePage.addOBJ(no);
+                            ep.activePage.activeOBJ = no;
+
+                            ep.activePage.setOutline(no);
+
+                            jtf.setText("");
                         }
-                        ep.activePage.addOBJ(no);
-                        ep.activePage.activeOBJ = no;
                     }else if(status == Status.ToolBarDow){
                         filename = temp;
 //                        p.activePage.Dowimg(temp);

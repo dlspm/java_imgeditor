@@ -103,25 +103,6 @@ import javax.swing.*;
         
         Btnimg.addMouseListener(new MouseAdapter() {
             public void mouseClicked(MouseEvent e) {
-                
-                //                try {
-//                    Img no = new Img("https://d2hsbzg80yxel6.cloudfront.net/images/69511/medium/16639037694fbdf3c729b5b.jpg");
-//                    ep.activePage.addOBJ(no);
-//                    ep.activePage.activeOBJ = no;
-//                    
-////                    ep.activePage.add(no);
-//                  //  ep.activePage.revalidate();
-//                    
-//                    if(ep.activePage!=null){
-//                        ep.parametersBar.status = Status.ToolBarImg;
-//                        ep.parametersBar.setToolBarImg();
-//                    }
-//                    System.out.println("success Img");
-//                    
-//                } catch (MalformedURLException ex) {
-//                    Logger.getLogger(ToolBar.class.getName()).log(Level.SEVERE, null, ex);
-//                }
-
 
                 //載入圖片
                 if (ep.activePage.activeOBJ != null){
@@ -129,25 +110,20 @@ import javax.swing.*;
                     ep.activePage.activeOBJ =null;
                 }
                 
-                Img no = null;
-                try {
-                    no = new Img("tt.jpg", ep);
-                } catch (MalformedURLException ex) {
-                    Logger.getLogger(ToolBar.class.getName()).log(Level.SEVERE, null, ex);
-                }
-                ep.activePage.addOBJ(no);
-                ep.activePage.activeOBJ = no;
+//                Img no = null;
+//                try {
+//                    no = new Img("tt.jpg", ep);
+//                } catch (MalformedURLException ex) {
+//                    Logger.getLogger(ToolBar.class.getName()).log(Level.SEVERE, null, ex);
+//                }
+//                ep.activePage.addOBJ(no);
+//                ep.activePage.activeOBJ = no;
+//                
+//                ep.activePage.setOutline(no);
                 
-                ep.activePage.setOutline(no);
+                ep.parametersBar.status = Status.ToolBarImg;
+                ep.parametersBar.setToolBarImg();
                 
-                
-//                ep.activePage.repaint();
-                //                    ep.activePage.add(no);
-                //  ep.activePage.revalidate();
-                //                    if (ep.activePage != null) {
-                //                        ep.parametersBar.status = Status.ToolBarImg;
-                //                        ep.parametersBar.setToolBarImg();
-                //                    }
                 System.out.println("success Img");
             }
         });
@@ -191,7 +167,6 @@ import javax.swing.*;
                 if(ep.activePage!=null){
                     ep.parametersBar.status = Status.ToolBarIcon;
                     ep.parametersBar.setToolBarIcon();
-                    //                ep.activePage.revalidate();
                 }
                 System.out.println("success Icon");
                 
@@ -216,13 +191,13 @@ import javax.swing.*;
         Btndel.addMouseListener(new MouseAdapter() {
             public void mouseClicked(MouseEvent e) {
                 if (ep.activePage != null) {
-
                     if (ep.activePage.activeOBJ != null) {
+                        ep.activePage.unsetOutline(ep.activePage.activeOBJ);
                         ep.activePage.remove(ep.activePage.activeOBJ);
                         ep.activePage.activeOBJ = null;
-//                        ep.activePage.repaint();
                     }
-                    
+                    ep.parametersBar.status = Status.ToolBarDele;
+                    ep.parametersBar.setToolBarDele();
                 }
                 System.out.println("success Selected");
 

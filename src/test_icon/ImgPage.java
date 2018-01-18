@@ -132,14 +132,7 @@ public class ImgPage extends JPanel{
     void Loadimg(String path) throws MalformedURLException{
         System.out.println("Loadimg" + path);
         Img on = new Img(path, p);
-//        Img no = new Img(path, p.activePage, p);
-//        Img on = new Img(path);
         this.add(on);
-//        try {
-//            Img on = new Img(path);
-//        } catch (MalformedURLException ex) {
-//            Logger.getLogger(ImgPage.class.getName()).log(Level.SEVERE, null, ex);
-//        }
     }
     
     protected Rectangle makeRect(Point p1, Point p2) {
@@ -172,74 +165,33 @@ public class ImgPage extends JPanel{
         
         if(activeOBJ != null){
             if(activeOBJ.status == Status.Activated){
-                
-                
-                
-                // super.paintComponent(g);
-                //g.setColor(Color.red);
                 Point p = activeOBJ.getLocation();
                 Dimension d = activeOBJ.getSize();
                 System.out.println("!paintComponent:" + p.x + "," + p.y + "," + d.width + "," + d.height);
                 g.drawRect(p.x - 10, p.y - 10, d.width + 20, d.height + 20);
-                 
-//        picture(eo);
-                
-                
+            }else{
+                cps.setVisible(false);
             }
-        
-        
         }
-        
-        
-        
-    }
-    
-    public void picture(easyOBJ eo){
-        System.out.println("picture");
-        Graphics g = ImgPage.this.getGraphics();
-        Point p = eo.getLocation();
-        Dimension d = eo.getSize();
-        
-        System.out.println("picture:" + p.x + "," + p.y + "," + d.width + "," + d.height);
-        
-        Graphics2D g2=(Graphics2D)g;
-//        double leftX=100;
-//        double topY=100;
-//        double width=200;
-//        double height=150;
-        Rectangle2D rect = new Rectangle2D.Double(p.x, p.y, d.width, d.height);
-        g2.draw(rect);
-        
-        cps.setVisible(true);
-//        repaint();
-
-        
     }
     
     public void setOutline(easyOBJ eo){
         System.out.println("setOutline");
         
         Graphics g = this.getGraphics();
-       // super.paintComponent(g);
-        //g.setColor(Color.red);
         Point p = eo.getLocation();
         Dimension d = eo.getSize();
         System.out.println("paintComponent:" + p.x + "," + p.y + "," + d.width + "," + d.height);
         g.drawRect(p.x-10, p.y-10, d.width+20, d.height+20);
         this.repaint();
-        picture(eo);
         cps.setLocations();
         cps.setVisible(true);
-        //repaint();
     }
     
     public void unsetOutline(easyOBJ eo){
         System.out.println("onsetOutline");
         
         Graphics g = ImgPage.this.getGraphics();
-        //g.setXORMode(Color.red);
-//        g.setPaint(Color.BLUE);
-//            super.paintComponent(g);
         Point p = eo.getLocation();
         Dimension d = eo.getSize();
         System.out.println("paintComponent:" + p.x + "," + p.y + "," + d.width + "," + d.height);
@@ -271,29 +223,10 @@ public class ImgPage extends JPanel{
                 Graphics2D g2d = (Graphics2D) ImgPage.this.getGraphics();
                 g2d.setXORMode(Color.red);
                 g2d.setPaint(Color.BLUE);
-                if (cp != null) { // 覆蓋過原本
-//                        g2d.setPaint(Page.this.getBackground());
-//                        g2d.draw(makeOval(fp, cp));
-                }
-//                    g2d.setPaint(Color.BLUE);
-                cp = e.getPoint();
                 g2d.draw(makeOval(fp, cp));
             
             }
             
-            
-//            Point p = activeOBJ.getLocation();
-//            Dimension d = activeOBJ.getSize();
-//            System.out.println("paintComponent:" + p.x + "," + p.y + "," + d.width + "," + d.height);
-//            Graphics g = ImgPage.this.getGraphics();
-            
-//            Graphics2D g2d = (Graphics2D) ImgPage.this.getGraphics();
-//            g2d.setXORMode(Color.red);
-//            g2d.setPaint(Color.BLUE);
-//            if (cp != null) { // 覆蓋過原本
-//                g.drawRect(p.x - 5, p.y - 5, d.width + 10, d.height + 10);
-//            }
-//            cp = e.getPoint();
         }
 
         @Override

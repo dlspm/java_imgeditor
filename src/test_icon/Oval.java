@@ -1,3 +1,8 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package test_icon;
 
 import java.awt.*;
@@ -29,7 +34,6 @@ public class Oval extends easyOBJ {
     
     protected void paintComponent(Graphics g)
     {
-        System.out.println("OvalpaintComponent");
         
         Graphics2D g2d = (Graphics2D)g;
         g2d.setPaint(Color.BLUE);

@@ -26,6 +26,26 @@ public class Pen extends easyOBJ{
 //    
 //    }
 //    
+
+    public Pen(EasyPainter p) {
+        super(p);
+    }
+//    public Pen(ImgPage p) {
+//        super(p);
+//    }
+//    
+//    }
+//    
+
+    
+    
+//    Pen(){
+//    
+//    
+//    
+//    
+//    }
+//    
     
     
     

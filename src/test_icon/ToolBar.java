@@ -104,8 +104,7 @@ import javax.swing.*;
         Btnimg.addMouseListener(new MouseAdapter() {
             public void mouseClicked(MouseEvent e) {
                 
-                try {
-                    //                try {
+                //                try {
 //                    Img no = new Img("https://d2hsbzg80yxel6.cloudfront.net/images/69511/medium/16639037694fbdf3c729b5b.jpg");
 //                    ep.activePage.addOBJ(no);
 //                    ep.activePage.activeOBJ = no;
@@ -124,33 +123,27 @@ import javax.swing.*;
 //                }
 
 
-                    //載入圖片
-                    if (ep.activePage.activeOBJ != null){
-                        ep.activePage.activeOBJ =null;
-                    }
-                    
-                    
-                    Img no = new Img("tt.jpg", ep);
-                    
-                    ep.activePage.addOBJ(no);
-                    ep.activePage.activeOBJ = no;
-                    
-//                    ep.activePage.setOutline(no);
-                    ep.activePage.repaint();
-
-                    //                    ep.activePage.add(no);
-                    //  ep.activePage.revalidate();
-//                    if (ep.activePage != null) {
-//                        ep.parametersBar.status = Status.ToolBarImg;
-//                        ep.parametersBar.setToolBarImg();
-//                    }
-                    System.out.println("success Img");
-
-
-
+                //載入圖片
+                if (ep.activePage.activeOBJ != null){
+                    ep.activePage.activeOBJ =null;
+                }
+                Img no = null;
+                try {
+                    no = new Img("tt.jpg", ep);
                 } catch (MalformedURLException ex) {
                     Logger.getLogger(ToolBar.class.getName()).log(Level.SEVERE, null, ex);
                 }
+                ep.activePage.addOBJ(no);
+                ep.activePage.activeOBJ = no;
+                //                    ep.activePage.setOutline(no);
+                ep.activePage.repaint();
+                //                    ep.activePage.add(no);
+                //  ep.activePage.revalidate();
+                //                    if (ep.activePage != null) {
+                //                        ep.parametersBar.status = Status.ToolBarImg;
+                //                        ep.parametersBar.setToolBarImg();
+                //                    }
+                System.out.println("success Img");
             }
         });
         this.add(Btnimg);

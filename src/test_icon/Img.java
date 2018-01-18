@@ -52,11 +52,12 @@ public class Img extends easyOBJ{
         this.setLocation(Jlaimg.getLocation());
         this.setSize(imc.getIconWidth(), imc.getIconHeight());
 //        ep.activePage.picture(this);
-        ep.activePage.setOutline(Img.this);
+//        ep.activePage.setOutline(Img.this);
 //        p.repaint();
         
     }
-    
+
+
 //    Img(String su, EasyPainter ep) throws MalformedURLException{
 //    
 //        status = Status.Activated;

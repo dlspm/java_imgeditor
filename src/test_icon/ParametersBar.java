@@ -37,7 +37,7 @@ import static javax.swing.JFrame.EXIT_ON_CLOSE;
     JButton Btnbig, Btnsmall, Btnall, Btnchoose;
     JComboBox Jcboutput ;
     public Status status;
-    public EasyPainter p;
+    public EasyPainter ep;
     
     String filename="";
     
@@ -47,7 +47,7 @@ import static javax.swing.JFrame.EXIT_ON_CLOSE;
     
     ParametersBar(EasyPainter ep){
         this.setLayout(new GridLayout(9, 1));
-        p=ep;
+        ep=ep;
         status = Status.ToolBarNewPage; //因為一定是從 NewPage 開始
         
         Jtfsize = new JTextField(15);
@@ -310,11 +310,11 @@ import static javax.swing.JFrame.EXIT_ON_CLOSE;
                 System.out.println("變小");
             }else if(e.getSource() == Btnall){
                 System.out.println("全部");
-                p.activePage.Dowimg(filename);                
+                ep.activePage.Dowimg(filename);                
             }else if(e.getSource() == Btnchoose){
                 System.out.println("選取");
                 try {
-                    p.activePage.Seledowimg("img/" + filename);
+                    ep.activePage.Seledowimg("img/" + filename);
                     //需要先劃出一個框
                 } catch (Exception ex) {
                     Logger.getLogger(ParametersBar.class.getName()).log(Level.SEVERE, null, ex);
@@ -376,16 +376,16 @@ import static javax.swing.JFrame.EXIT_ON_CLOSE;
                     
                     
                     if (status == Status.ToolBarImg){
+                        System.out.println("！！！！！！！！" + "Jftimgpath" + temp);
+                        //
+                        Img no = null;
                         try {
-
-                            System.out.println("！！！！！！！！" + "Jftimgpath" + temp);
-//                   
-                            Img no = new Img(temp, p.activePage);
-                            p.activePage.addOBJ(no);
-                            p.activePage.activeOBJ = no;
+                            no = new Img(temp, ep);
                         } catch (MalformedURLException ex) {
                             Logger.getLogger(ParametersBar.class.getName()).log(Level.SEVERE, null, ex);
                         }
+                        ep.activePage.addOBJ(no);
+                        ep.activePage.activeOBJ = no;
                     }else if(status == Status.ToolBarDow){
                         filename = temp;
 //                        p.activePage.Dowimg(temp);

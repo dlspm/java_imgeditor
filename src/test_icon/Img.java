@@ -48,6 +48,7 @@ public class Img extends easyOBJ{
         this.setSize( imc.getIconWidth(), imc.getIconHeight());
         x= this.getLocation();
         this.setLocation(x);
+        
     }
     
     Img(String su) throws MalformedURLException{

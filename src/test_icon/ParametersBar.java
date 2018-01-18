@@ -35,16 +35,18 @@ import static javax.swing.JFrame.EXIT_ON_CLOSE;
   public class ParametersBar extends JPanel{  
     JTextField Jtfsize, Jtfcolor, Jtfline, Jftimgpath;
     JButton Btnbig, Btnsmall, Btnall, Btnchoose;
+    JComboBox Jcboutput ;
     public Status status;
     public EasyPainter p;
     
+    String filename="";
     
     JButton jb1, jb2;
     JTextField jtf1, jtf2, jtf3;
 //    ImgPage ip = new ImgPage();
     
     ParametersBar(EasyPainter ep){
-        this.setLayout(new GridLayout(8, 1));
+        this.setLayout(new GridLayout(9, 1));
         p=ep;
         status = Status.ToolBarNewPage; //因為一定是從 NewPage 開始
         
@@ -83,6 +85,12 @@ import static javax.swing.JFrame.EXIT_ON_CLOSE;
         Jtfline.setVisible(false);
         Jftimgpath.setVisible(false);
         
+//        String[] option = new String[]{"選項一", "選項二"};
+//        Jcboutput = new JComboBox(option);
+//
+//        Jcboutput.setVisible(false);
+//        this.add(Jcboutput);
+        
         Btnbig = new JButton("變大");
         Btnbig.setVisible(false);
         Btnsmall = new JButton("變小");
@@ -91,6 +99,7 @@ import static javax.swing.JFrame.EXIT_ON_CLOSE;
         Btnall.setVisible(false);
         Btnchoose = new JButton("選取");
         Btnchoose.setVisible(false);
+        
         
         
         this.add(Btnbig);
@@ -301,8 +310,17 @@ import static javax.swing.JFrame.EXIT_ON_CLOSE;
                 System.out.println("變小");
             }else if(e.getSource() == Btnall){
                 System.out.println("全部");
+                p.activePage.Dowimg(filename);                
             }else if(e.getSource() == Btnchoose){
                 System.out.println("選取");
+                try {
+                    p.activePage.Seledowimg("img/" + filename);
+                    //需要先劃出一個框
+                } catch (Exception ex) {
+                    Logger.getLogger(ParametersBar.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                
+                
             }
             
         }
@@ -369,11 +387,9 @@ import static javax.swing.JFrame.EXIT_ON_CLOSE;
                             Logger.getLogger(ParametersBar.class.getName()).log(Level.SEVERE, null, ex);
                         }
                     }else if(status == Status.ToolBarDow){
-                        p.activePage.Dowimg(temp);
+                        filename = temp;
+//                        p.activePage.Dowimg(temp);
                     }
-                    
-                    
-                    
 
                 }
                 

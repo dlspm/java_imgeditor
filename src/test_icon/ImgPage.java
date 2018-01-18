@@ -13,6 +13,8 @@ import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.Point;
 import java.awt.Rectangle;
+import java.awt.Robot;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
@@ -54,6 +56,7 @@ public class ImgPage extends JPanel{
         status = Status.Selection;
         
         cps = new ControlPoints(ImgPage.this);
+        cps.setVisible(false);
         
         
         lines = new Vector<Line>();
@@ -65,6 +68,20 @@ public class ImgPage extends JPanel{
 
         this.setSize(600,600);
     
+    }
+    
+    void Seledowimg(String path) throws Exception{
+        
+        // 要先改變狀態為 React
+        //然後把畫出來的 code 寫在 mouseReleased 並判斷
+        
+        
+//        Robot robot = new Robot();
+////        Dimension d = Toolkit.getDefaultToolkit().getScreenSize();
+//        Dimension ps = this.getSize(); //取得 Panel 的 Size
+//        Rectangle rect = new Rectangle(0, 0, ps.width, ps.height);
+//        BufferedImage image = robot.createScreenCapture(rect);
+//        ImageIO.write(image, "jpg", new File(path));
     }
 
     void Dowimg(String filename){
@@ -135,7 +152,15 @@ public class ImgPage extends JPanel{
     }
     
     protected void paintComponent(Graphics g) {
-        System.out.println("重劃拉幹 幹！");
+        System.out.println("paintComponent");
+        
+        if(ImgPage.this.status == Status.ToolBarPan){
+            for (int i = 0; i < this.lines.size(); i++) {
+                Line l = this.lines.elementAt(i);
+                g.drawLine(l.sp.x, l.sp.y, l.ep.x, l.ep.y);
+            }
+
+        }
         
         if(this.activeOBJ != null){
             System.out.println("有物件拉 幹！");
@@ -150,6 +175,35 @@ public class ImgPage extends JPanel{
             cps.setVisible(false);
         }
     }
+    
+//    public void setOutline(easyOBJ eo){
+//        System.out.println("setOutline");
+//        
+//        Graphics g = ImgPage.this.getGraphics();
+////            super.paintComponent(g);
+//        Point p = eo.getLocation();
+//        Dimension d = eo.getSize();
+//        System.out.println("paintComponent:" + p.x + "," + p.y + "," + d.width + "," + d.height);
+//        g.drawRect(p.x - 5, p.y - 5, d.width + 10, d.height + 10);
+//        cps.setLocations();
+//        cps.setVisible(true);
+//    }
+//    
+//    public void onsetOutline(easyOBJ eo){
+//        System.out.println("onsetOutline");
+//        
+//        Graphics g = ImgPage.this.getGraphics();
+//        g.setXORMode(Color.red);
+////        g.setPaint(Color.BLUE);
+////            super.paintComponent(g);
+//        Point p = eo.getLocation();
+//        Dimension d = eo.getSize();
+//        System.out.println("paintComponent:" + p.x + "," + p.y + "," + d.width + "," + d.height);
+//        g.drawRect(p.x - 5, p.y - 5, d.width + 10, d.height + 10);
+//        cps.setVisible(false);
+//    
+//    }
+//    
 
     class MyMouseMotionListener implements MouseMotionListener{
 
@@ -159,6 +213,7 @@ public class ImgPage extends JPanel{
             System.out.println(fp+","+cp);
 
             if(ImgPage.this.status == Status.ToolBarPan){
+                System.out.print("ToolBarPan");
                 cp = e.getPoint();
                 Graphics g = ImgPage.this.getGraphics();
                 g.drawLine(lp.x, lp.y, cp.x, cp.y);
@@ -167,6 +222,7 @@ public class ImgPage extends JPanel{
             
             
             }else if(ImgPage.this.status == Status.ToolBarRect){
+                System.out.print("ToolBarRect");
                 System.out.println(fp + "," + cp);
                 Graphics2D g2d = (Graphics2D) ImgPage.this.getGraphics();
                 g2d.setXORMode(Color.red);

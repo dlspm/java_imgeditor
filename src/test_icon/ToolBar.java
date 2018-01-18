@@ -131,16 +131,23 @@ import javax.swing.*;
 
 
                     //載入圖片
+                    if (ep.activePage.activeOBJ != null){
+                        ep.activePage.activeOBJ =null;
+                    }
+                    
+                    
                     Img no = new Img("tt.jpg", ep.activePage);
+//                    ep.activePage.setOutline(no);
                     ep.activePage.addOBJ(no);
                     ep.activePage.activeOBJ = no;
+                    ep.activePage.repaint();
 
                     //                    ep.activePage.add(no);
                     //  ep.activePage.revalidate();
-                    if (ep.activePage != null) {
-                        ep.parametersBar.status = Status.ToolBarImg;
-                        ep.parametersBar.setToolBarImg();
-                    }
+//                    if (ep.activePage != null) {
+//                        ep.parametersBar.status = Status.ToolBarImg;
+//                        ep.parametersBar.setToolBarImg();
+//                    }
                     System.out.println("success Img");
 
 

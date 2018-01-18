@@ -60,12 +60,15 @@ public class easyOBJ extends JPanel {
                     if (parent.activeOBJ != null) {
                         System.out.println("1" + parent.activeOBJ.status);
                         //  parent.activeOBJ.outline.setVisible(false);
+//                        parent.onsetOutline(easyOBJ.this);
                         parent.activeOBJ.status = Status.Inactivated;
+                        parent.activeOBJ = null;
                     }
 
                     // outline.setVisible(true);
                     status = Status.Activated;
-                    parent.activeOBJ = easyOBJ.this; //從新指定新的物件並畫出外框
+                    parent.activeOBJ = easyOBJ.this;
+                    parent.activeOBJ.status = Status.Activated;//從新指定新的物件並畫出外框
                     parent.repaint();
                     System.out.println("1" + parent.activeOBJ.status);
                 }else if(status==Status.Activated){

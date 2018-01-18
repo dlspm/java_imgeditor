@@ -89,8 +89,8 @@ public class ImgPage extends JPanel{
         System.out.println("reduceimg:" + s);
         if(activeOBJ.easyOBJimg != null){
             
-//            Image changeimg = reduce(icon,s);
-
+//            this.unsetOutline(activeOBJ);
+            System.out.println("!activeimg!:" + activeimg.getLocation().x + "," + activeimg.getLocation().y + "," + activeOBJ.getSize().width + "," + activeOBJ.getSize().height);
             int width = activeOBJ.easyOBJimg.imc.getIconWidth();// your prefered width
             int height = activeOBJ.easyOBJimg.imc.getIconHeight();//your prefered height
 
@@ -104,14 +104,20 @@ public class ImgPage extends JPanel{
                 height *= 1.3;
                 
             }else if(s == "變小"){
-                width *= 0.7;
-                height *= 0.7;
+                width /= 1.3;
+                height /= 1.3;
             }
             
-            System.out.println("reduceimg:" + width + "," + height);
             image.setImage(image.getImage().getScaledInstance(width, height, Image.SCALE_DEFAULT));
-
             activeimg.Jlaimg.setIcon(image);
+//            activeimg.setLocation(activeimg.Jlaimg.getLocation());
+//            activeimg.setSize(width, height);
+            System.out.println("!activeOBJ!:" + activeOBJ.getLocation().x + "," + activeOBJ.getLocation().y + "," + activeOBJ.getSize().width + "," + activeOBJ.getSize().height);
+            activeOBJ = activeimg;
+//            activeOBJ.setLocation(activeimg.Jlaimg.getLocation());
+//            activeOBJ.setSize(activeimg.Jlaimg.getSize());
+            System.out.println("reduceimg:activeimg" + activeimg.getSize().width + activeimg.getSize().height );
+            this.setOutline(activeOBJ);
             repaint();
             
         }
@@ -211,6 +217,7 @@ public class ImgPage extends JPanel{
             if(activeOBJ.status == Status.Activated){
                 Point p = activeOBJ.getLocation();
                 Dimension d = activeOBJ.getSize();
+                
                 System.out.println("!paintComponent:" + p.x + "," + p.y + "," + d.width + "," + d.height);
                 g.drawRect(p.x - 10, p.y - 10, d.width + 20, d.height + 20);
             }else{
@@ -233,7 +240,7 @@ public class ImgPage extends JPanel{
     }
     
     public void unsetOutline(easyOBJ eo){
-        System.out.println("onsetOutline");
+        System.out.println("unsetOutline");
         
         Graphics g = ImgPage.this.getGraphics();
         Point p = eo.getLocation();
@@ -249,11 +256,11 @@ public class ImgPage extends JPanel{
 
         @Override
         public void mouseDragged(MouseEvent e) {
-            System.out.print("mouse dragged:");
+            System.out.print("mouse dragged:" + p.parametersBar.status);
             System.out.println(fp+","+cp);
 
-            if(ImgPage.this.status == Status.ToolBarPan){
-                System.out.print("ToolBarPan");
+            if(p.parametersBar.status == Status.ToolBarPan){
+                
                 cp = e.getPoint();
                 Graphics g = ImgPage.this.getGraphics();
                 g.drawLine(lp.x, lp.y, cp.x, cp.y);
@@ -261,12 +268,19 @@ public class ImgPage extends JPanel{
                 lp = cp;
             
             
-            }else if(ImgPage.this.status == Status.ToolBarRect){
-                System.out.print("ToolBarRect");
+            }else if(p.parametersBar.status == Status.ToolBarRect){
+                
                 System.out.println(fp + "," + cp);
+                
                 Graphics2D g2d = (Graphics2D) ImgPage.this.getGraphics();
                 g2d.setXORMode(Color.red);
                 g2d.setPaint(Color.BLUE);
+                if (cp != null) { // 覆蓋過原本
+//                        g2d.setPaint(Page.this.getBackground());
+                        g2d.draw(makeOval(fp, cp));
+                }
+//                    g2d.setPaint(Color.BLUE);
+                cp = e.getPoint();
                 g2d.draw(makeOval(fp, cp));
             
             }
@@ -290,14 +304,14 @@ public class ImgPage extends JPanel{
         @Override
         public void mousePressed(MouseEvent e) {
             
-            System.out.println("mouse pressed");
+            System.out.println("mouse pressed" + p.parametersBar.status);
             
-            if(status == Status.ToolBarPan){
-                fp = e.getPoint(); //為了之後畫框
+            if(p.parametersBar.status == Status.ToolBarPan){
+//                fp = e.getPoint(); //為了之後畫框
                 lp = e.getPoint();
             
             
-            }else if(status == Status.ToolBarRect){
+            }else if(p.parametersBar.status == Status.ToolBarRect){
                 fp = e.getPoint();
                 cp = null;
             }
@@ -335,39 +349,19 @@ public class ImgPage extends JPanel{
             if (cp != null) {
                 System.out.println(2);
 
-                if (ImgPage.this.status == Status.ToolBarPan) {
+                if (p.parametersBar.status == Status.ToolBarPan) {
                     System.out.println(fp + "," + lp);
-//                        g.drawRect(fp.x, fp.y, cp.x - fp.x, cp.y -fp.y);
-//                        DrawLine newLine = new DrawLine(Page.this, fp, cp);
-
-//                        Page.this.add(newLine);
-//                        Page.this.activeOBJ = newLine;
-//                    ImgPage.this.repaint();
                 }
-                if (ImgPage.this.status == Status.ToolBarRect) {
-                    cp = e.getPoint();
-//                    shapeList.add(makeRect(begin, end));
-//                    ImgPage.this.rects.add(new Rect(fp, cp));
-                    fp = cp = null;
-//                    repaint();
-                }
-                if (ImgPage.this.status == Status.EllipseOBJ) {
-//                        cp = e.getPoint();
-//                     shapeList.add(makeRect(begin, end));
-//                        Page.this.ovals.add(new Rect(begin, end));
-
+                if (p.parametersBar.status == Status.ToolBarRect) {
+                    
                     System.out.println("Released" + fp + "," + cp);
-//                        Oval newOBJ = new Oval(Page.this, fp, cp.x-fp.x, cp.y-fp.y );
-
-                    Oval newOBJ = new Oval(ImgPage.this, fp, cp);
-                    ImgPage.this.add(newOBJ);
-                    ImgPage.this.activeOBJ = newOBJ;
-//                    ImgPage.this.repaint();
-
-//                        cp = e.getPoint();
-//                        g2d.draw(makeOval(fp, cp));
-//                        cp = null;  //畫出來 cp 是 null
+                    
+                    Oval ovalOBJ = new Oval(ImgPage.this, fp, cp);
+                    ImgPage.this.add(ovalOBJ);
+                    activeOBJ = ovalOBJ;
+                    ImgPage.this.setOutline(activeOBJ);
                 }
+                
             }
 
 //            repaint();

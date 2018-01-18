@@ -277,13 +277,16 @@ import static javax.swing.JFrame.EXIT_ON_CLOSE;
             if(e.getSource() == Btnbig){
                 Point x ;
                 System.out.println("變大");
-//                x = p.activePage.activeOBJ.getLocation();
-//                p.activePage.activeOBJ.setLocation((x.x)+20, (x.y)+20);
-//                p.activePage.addOBJ(no);
+                System.out.println("!active!:" + ep.activePage.activeOBJ.getLocation().x + "," + ep.activePage.activeOBJ.getLocation().y + "," + ep.activePage.activeOBJ.getSize().width + "," + ep.activePage.activeOBJ.getSize().height);
+                ep.activePage.unsetOutline(ep.activePage.activeOBJ);
+                ep.activePage.reduceimg(ep.activePage.activeOBJ.easyOBJimg.imc,"變大");
                 
             }else if(e.getSource() == Btnsmall){
                 System.out.println("變小");
+                System.out.println("!active!:" + ep.activePage.activeOBJ.getLocation().x + "," + ep.activePage.activeOBJ.getLocation().y + "," + ep.activePage.activeOBJ.getSize().width + "," + ep.activePage.activeOBJ.getSize().height);
+                ep.activePage.unsetOutline(ep.activePage.activeOBJ);
                 ep.activePage.reduceimg(ep.activePage.activeOBJ.easyOBJimg.imc,"變小");
+                
                 
                 
             }else if(e.getSource() == Btnall){
@@ -297,10 +300,7 @@ import static javax.swing.JFrame.EXIT_ON_CLOSE;
                 } catch (Exception ex) {
                     Logger.getLogger(ParametersBar.class.getName()).log(Level.SEVERE, null, ex);
                 }
-                
-                
             }
-            
         }
 
         @Override
@@ -373,7 +373,11 @@ import static javax.swing.JFrame.EXIT_ON_CLOSE;
                             jtf.setText("");
                         }
                     }else if(status == Status.ToolBarDow){
-                        filename = temp;
+                        if(temp != ""){
+                            filename = temp;
+                            ep.activePage.Dowimg(filename);
+                        }
+
 //                        p.activePage.Dowimg(temp);
                     }
 

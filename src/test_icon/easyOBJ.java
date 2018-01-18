@@ -157,7 +157,6 @@ public class easyOBJ extends JPanel {
                         
 //                        parent.onsetOutline(easyOBJ.this);
                         parent.activeOBJ.status = Status.Inactivated;
-                        parent.unsetOutline(easyOBJ.this);
                         parent.activeOBJ = null;
                     }
 
@@ -210,7 +209,7 @@ public class easyOBJ extends JPanel {
     }
     
 
-    easyOBJ(ImgPage p, Point sp, int w, int h) {
+    easyOBJ(ImgPage p, Point sp, int w, int h) { //畫
         super();
         status = Status.Activated;
         parent = p;
@@ -218,10 +217,10 @@ public class easyOBJ extends JPanel {
         this.setLocation(sp);
 
         // this.setBackground(Color.red);
-        this.addMouseMotionListener(new MouseAdapter() {
-            public void mouseDragged(MouseEvent e) {
-                System.out.println("easD" + parent.activeOBJ.status);
-                System.out.println("easD" + status);
+        this.addMouseMotionListener(new MouseAdapter(){ 
+            public void mouseDragged(MouseEvent e){
+                System.out.println("imgDragged:"+e.getXOnScreen() + "," + e.getYOnScreen());
+                
                 if (cp == null) {
                     cp = new Point();
                 }
@@ -236,15 +235,20 @@ public class easyOBJ extends JPanel {
                 easyOBJ.this.setLocation(op);
                 lp.x = cp.x;
                 lp.y = cp.y;
-
             }
         });
+        
+        
         this.addMouseListener(new MouseAdapter() {
             public void mousePressed(MouseEvent e) {
-                System.out.println("mouse pressed in easyOBJ");
+                System.out.println("imgPressed_ep:" + status);
                 if (status == Status.Inactivated) {
+
                     if (parent.activeOBJ != null) {
+                        System.out.println("1" + parent.activeOBJ.status);
                         //  parent.activeOBJ.outline.setVisible(false);
+                        
+//                        parent.onsetOutline(easyOBJ.this);
                         parent.activeOBJ.status = Status.Inactivated;
                         parent.activeOBJ = null;
                     }
@@ -252,32 +256,47 @@ public class easyOBJ extends JPanel {
                     // outline.setVisible(true);
                     status = Status.Activated;
                     parent.activeOBJ = easyOBJ.this;
-                    parent.cps.setLocations();
+                    parent.activeOBJ.status = Status.Activated;//從新指定新的物件並畫出外框
 //                    parent.repaint();
                     System.out.println("1" + parent.activeOBJ.status);
-                } else if (status == Status.Activated) {
-                    System.out.println("2" + parent.activeOBJ.status);
-                    if (lp == null) {
+                }else if(status==Status.Activated){
+    //                ImgPage.this.activeOBJ.status
+                    System.out.println("2" + parent.status + "," + status);
+                    parent.unsetOutline(easyOBJ.this);
+                    if (lp == null)
                         lp = new Point();
-                    }
                     lp.x = e.getXOnScreen();
                     lp.y = e.getYOnScreen();
                     op = easyOBJ.this.getLocation();
-                    parent.activeOBJ = easyOBJ.this;
+                    
                     parent.status = Status.MovingOBJ;
                     status = Status.Moving;
-                    //setVisible(false);
-                    System.out.println("2" + parent.activeOBJ.status);
+                    System.out.println("2" + parent.status + "," + status);
                 }
+                
             }
-
-            public void mouseReleased(MouseEvent e) {
+            
+            public void mouseReleased(MouseEvent e){
                 System.out.println("mouse released in easyOBJ");
-                if (status == Status.Moving) {
-
-                    status = Status.Activated;
-                }
+                
+                parent.status = Status.Selection;
+                status = Status.Activated;
+                
+                
+                System.out.println("3" + parent.status + "," + status);
+                
+                parent.setOutline(easyOBJ.this);
             }
+            
+            public void mouseEntered(MouseEvent e){
+                
+            }
+            
+            public void mouseExited(MouseEvent e){
+                
+            }
+            
+            
         });
 
     }

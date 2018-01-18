@@ -146,7 +146,7 @@ import static javax.swing.JFrame.EXIT_ON_CLOSE;
         Btnchoose.setVisible(false);
         Jtfline.setVisible(true);
         Btncolor.setVisible(true);
-        Jtfsize.setVisible(true);
+        Jtfsize.setVisible(false);
         
         this.revalidate();
     }
@@ -173,7 +173,7 @@ import static javax.swing.JFrame.EXIT_ON_CLOSE;
         Btnchoose.setVisible(false);
         Jtfline.setVisible(true);
         Btncolor.setVisible(true);
-        Jtfsize.setVisible(true);
+        Jtfsize.setVisible(false);
         
         this.revalidate();
     }
@@ -199,7 +199,7 @@ import static javax.swing.JFrame.EXIT_ON_CLOSE;
         Btnchoose.setVisible(false);
         Jtfline.setVisible(false);
         Btncolor.setVisible(true);
-        Jtfsize.setVisible(true);
+        Jtfsize.setVisible(false);
         
         this.revalidate();
     }

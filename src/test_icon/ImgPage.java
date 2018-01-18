@@ -5,6 +5,7 @@
  */
 package test_icon;
 
+import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
@@ -141,8 +142,9 @@ public class ImgPage extends JPanel{
     void Dowimg(String filename){
         FileOutputStream fos = null;
         try {
-            System.out.println("變大");
+            System.out.println("全部");
             File f = new File("img/" + filename);
+//            File f = new File("img/i.jpg");
             exportOtherShapesImage(f, this);
 //                Dowjpanel.this.exportOtherShapesImage("tt", jp3)
 
@@ -289,8 +291,8 @@ public class ImgPage extends JPanel{
                 
                 cp = e.getPoint();
                 Graphics g = ImgPage.this.getGraphics();
-                g.drawLine(lp.x, lp.y, cp.x, cp.y);
                 g.setColor(color);
+                g.drawLine(lp.x, lp.y, cp.x, cp.y);
                 ImgPage.this.lines.add(new Line(lp, cp));
                 lp = cp;
             
@@ -367,11 +369,15 @@ public class ImgPage extends JPanel{
             Graphics g = ImgPage.this.getGraphics();
             final Graphics2D g2d = (Graphics2D) g;
 //            g2d.setPaint(Color.BLUE);
+             g2d.setStroke(new BasicStroke(1.0f));  
+             g2d.setXORMode(Color.red);
             g.setXORMode(Color.red);
 
+
+
+            
             if (cp != null) {
                 System.out.println(1);
-                quadrant(g);
 //                    g2d.draw(makeRect(fp, cp));
             }
             if (cp != null) {
@@ -388,15 +394,19 @@ public class ImgPage extends JPanel{
                     
 //                    Rect newOBJ = new ;
                     Oval newOBJ = null ;
-                    
+//                    g2d.draw(makeOval(fp, cp));
                     
                     if (((cp.x - fp.x) > 0) && ((fp.y - cp.y) > 0)) {                     //第1象限
+                        
                         newOBJ = new Oval(ImgPage.this, fp.x, cp.y, cp.x - fp.x, fp.y - cp.y, color);
                     } else if (((fp.x - cp.x) > 0) && ((fp.y - cp.y) > 0)) {                //第2象限
+                        
                         newOBJ = new Oval(ImgPage.this, cp.x, cp.y, fp.x-cp.x, fp.y-cp.y, color);
                     } else if (((fp.x - cp.x) > 0) && ((cp.y - fp.y) > 0)) {                //第3象限
+                        
                         newOBJ = new Oval(ImgPage.this, cp.x, fp.y, fp.x-cp.x, cp.y-fp.y, color);
                     } else if (((cp.x - fp.x) > 0) && ((cp.y - fp.y) > 0)) {                //第4象限
+                        
                         newOBJ = new Oval(ImgPage.this, fp.x, fp.y, cp.x-fp.x, cp.y-fp.y, color);
                     }
 
